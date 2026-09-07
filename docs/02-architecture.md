@@ -1,6 +1,8 @@
-# Architecture
+# Architecture (detail views)
 
-Four views: context, data pipeline, code layers, and the two runtime sequences that matter.
+**Prefer the single end-to-end doc:** [`00-full-architecture.md`](00-full-architecture.md).
+
+This file keeps four zoomed-in views: context, data pipeline, code layers, and runtime sequences.
 
 ---
 

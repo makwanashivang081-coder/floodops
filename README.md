@@ -15,6 +15,8 @@ Cities do not lack weather data. They lack a system that turns fragmented weathe
 
 Full statement: [`docs/01-problem-statement.md`](docs/01-problem-statement.md)
 
+**Start here for the whole system:** [`docs/00-full-architecture.md`](docs/00-full-architecture.md) (inputs → pipeline → storage → code → runtime → API).
+
 ---
 
 ## System at a glance
