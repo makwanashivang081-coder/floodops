@@ -55,7 +55,10 @@ flowchart LR
     LOG -.next season.-> HIST
 ```
 
-Detailed diagrams: [`docs/02-architecture.md`](docs/02-architecture.md)
+Detailed diagrams: [`docs/02-architecture.md`](docs/02-architecture.md)  
+Storage (git / Postgres / object): [`docs/06-storage-architecture.md`](docs/06-storage-architecture.md)  
+Domain + API surface: [`docs/07-domain-model.md`](docs/07-domain-model.md)  
+Full target tree: [`docs/05-repo-structure.md`](docs/05-repo-structure.md)
 
 ---
 
@@ -107,25 +110,12 @@ Aligned to the competition's three stages. See [`docs/03-phases.md`](docs/03-pha
 
 ## Repository layout
 
-```
-.
-├── README.md                 you are here
-├── docs/                     problem, architecture, phases, data, conventions
-├── apps/
-│   ├── api/                  backend — clean architecture, service layer
-│   └── web/                  officer dashboard + citizen report page
-├── packages/
-│   ├── scoring/              pure, city-agnostic ranking engine (no I/O)
-│   └── shared/               types and schemas shared by api and web
-├── data/
-│   └── cities/
-│       ├── mumbai/           wards, blackspots, sources.md
-│       └── pune/
-└── tools/
-    └── terrain/              one-off DEM → low-point scripts
-```
+**Three stores:** Git seeds · Postgres+PostGIS · MinIO/S3 photos.  
+**Packages:** `domain` · `scoring` · `database` · `infrastructure` · `shared`.  
+**Apps:** `api` (use-cases) · `web` (dashboard + report).
 
-`apps/`, `packages/`, `data/`, `tools/` are created in Phase 2. Conventions and layer rules: [`docs/05-repo-structure.md`](docs/05-repo-structure.md)
+Full tree and “what we skip from PortSense-scale platforms”: [`docs/05-repo-structure.md`](docs/05-repo-structure.md).  
+`apps/` and `packages/` are created in Phase 2 — not empty scaffolding now.
 
 ---
 
