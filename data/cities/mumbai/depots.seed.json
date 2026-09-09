@@ -1,0 +1,20 @@
+[
+  {
+    "id": "mum-depot-bkc",
+    "name": "BKC depot",
+    "lat": 19.0607,
+    "lon": 72.8547
+  },
+  {
+    "id": "mum-depot-andheri",
+    "name": "Andheri depot",
+    "lat": 19.1193,
+    "lon": 72.847
+  },
+  {
+    "id": "mum-depot-borivali",
+    "name": "Borivali depot",
+    "lat": 19.2298,
+    "lon": 72.8471
+  }
+]

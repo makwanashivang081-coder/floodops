@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "purpose": "Labeled pothole severity pack (levels 1–5) for demo / visual ranking",
+  "scale": {
+    "1": "minor — surface crack / very small shallow wear",
+    "2": "low — dinner-plate size, shallow",
+    "3": "moderate — tire-sized crater, clear depth",
+    "4": "severe — large / multi-hole lane damage",
+    "5": "critical — lane-blocking failure; wet variant includes standing water"
+  },
+  "items": [
+    {
+      "id": "pothole-01",
+      "file": "pothole-01-level1-minor.jpg",
+      "level": 1,
+      "label": "minor",
+      "wet": false
+    },
+    {
+      "id": "pothole-02",
+      "file": "pothole-02-level1-minor.jpg",
+      "level": 1,
+      "label": "minor",
+      "wet": false
+    },
+    {
+      "id": "pothole-03",
+      "file": "pothole-03-level2-low.jpg",
+      "level": 2,
+      "label": "low",
+      "wet": false
+    },
+    {
+      "id": "pothole-04",
+      "file": "pothole-04-level2-low.jpg",
+      "level": 2,
+      "label": "low",
+      "wet": false
+    },
+    {
+      "id": "pothole-05",
+      "file": "pothole-05-level3-moderate.jpg",
+      "level": 3,
+      "label": "moderate",
+      "wet": false
+    },
+    {
+      "id": "pothole-06",
+      "file": "pothole-06-level3-moderate.jpg",
+      "level": 3,
+      "label": "moderate",
+      "wet": false
+    },
+    {
+      "id": "pothole-07",
+      "file": "pothole-07-level4-severe.jpg",
+      "level": 4,
+      "label": "severe",
+      "wet": false
+    },
+    {
+      "id": "pothole-08",
+      "file": "pothole-08-level4-severe.jpg",
+      "level": 4,
+      "label": "severe",
+      "wet": false
+    },
+    {
+      "id": "pothole-09",
+      "file": "pothole-09-level5-critical.jpg",
+      "level": 5,
+      "label": "critical",
+      "wet": false
+    },
+    {
+      "id": "pothole-10",
+      "file": "pothole-10-level5-critical-wet.jpg",
+      "level": 5,
+      "label": "critical",
+      "wet": true,
+      "notes": "Standing water in crater — useful for water-cue smoke tests"
+    }
+  ],
+  "status": "ready"
+}

@@ -1,0 +1,155 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mumbai-road-1",
+        "name": "LBS Marg",
+        "osm_id": "seed-1"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            72.87,
+            19.05
+          ],
+          [
+            72.88,
+            19.07
+          ],
+          [
+            72.89,
+            19.09
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mumbai-road-2",
+        "name": "SV Road",
+        "osm_id": "seed-2"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            72.83,
+            19.05
+          ],
+          [
+            72.835,
+            19.1
+          ],
+          [
+            72.84,
+            19.15
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mumbai-road-3",
+        "name": "WEH",
+        "osm_id": "seed-3"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            72.86,
+            19.08
+          ],
+          [
+            72.87,
+            19.11
+          ],
+          [
+            72.88,
+            19.14
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mumbai-road-4",
+        "name": "BKC Road",
+        "osm_id": "seed-4"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            72.85,
+            19.055
+          ],
+          [
+            72.855,
+            19.06
+          ],
+          [
+            72.86,
+            19.065
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mumbai-road-5",
+        "name": "Link Road Malad",
+        "osm_id": "seed-5"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            72.83,
+            19.17
+          ],
+          [
+            72.835,
+            19.185
+          ],
+          [
+            72.84,
+            19.2
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mumbai-road-6",
+        "name": "Eastern Express",
+        "osm_id": "seed-6"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            72.86,
+            19.03
+          ],
+          [
+            72.87,
+            19.05
+          ],
+          [
+            72.88,
+            19.07
+          ]
+        ]
+      }
+    }
+  ]
+}

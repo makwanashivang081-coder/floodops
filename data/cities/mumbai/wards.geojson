@@ -1,0 +1,365 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-he",
+        "name": "H/E Ward (BKC/Kurla)",
+        "centroid_lat": 19.0607,
+        "centroid_lon": 72.8547
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.8347,
+              19.0407
+            ],
+            [
+              72.87469999999999,
+              19.0407
+            ],
+            [
+              72.87469999999999,
+              19.0807
+            ],
+            [
+              72.8347,
+              19.0807
+            ],
+            [
+              72.8347,
+              19.0407
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-l",
+        "name": "L Ward (Kurla)",
+        "centroid_lat": 19.0686,
+        "centroid_lon": 72.8766
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.8566,
+              19.0486
+            ],
+            [
+              72.89659999999999,
+              19.0486
+            ],
+            [
+              72.89659999999999,
+              19.0886
+            ],
+            [
+              72.8566,
+              19.0886
+            ],
+            [
+              72.8566,
+              19.0486
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-ke",
+        "name": "K/E Ward (Andheri/Saki)",
+        "centroid_lat": 19.1193,
+        "centroid_lon": 72.847
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.827,
+              19.0993
+            ],
+            [
+              72.86699999999999,
+              19.0993
+            ],
+            [
+              72.86699999999999,
+              19.1393
+            ],
+            [
+              72.827,
+              19.1393
+            ],
+            [
+              72.827,
+              19.0993
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-hw",
+        "name": "H/W Ward (Khar)",
+        "centroid_lat": 19.0695,
+        "centroid_lon": 72.8375
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.81750000000001,
+              19.049500000000002
+            ],
+            [
+              72.8575,
+              19.049500000000002
+            ],
+            [
+              72.8575,
+              19.0895
+            ],
+            [
+              72.81750000000001,
+              19.0895
+            ],
+            [
+              72.81750000000001,
+              19.049500000000002
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-gn",
+        "name": "G/N Ward (Mahim/Dharavi)",
+        "centroid_lat": 19.0483,
+        "centroid_lon": 72.8382
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.8182,
+              19.0283
+            ],
+            [
+              72.8582,
+              19.0283
+            ],
+            [
+              72.8582,
+              19.0683
+            ],
+            [
+              72.8182,
+              19.0683
+            ],
+            [
+              72.8182,
+              19.0283
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-s",
+        "name": "S Ward (Powai/Vikhroli)",
+        "centroid_lat": 19.1187,
+        "centroid_lon": 72.9073
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.88730000000001,
+              19.0987
+            ],
+            [
+              72.9273,
+              19.0987
+            ],
+            [
+              72.9273,
+              19.1387
+            ],
+            [
+              72.88730000000001,
+              19.1387
+            ],
+            [
+              72.88730000000001,
+              19.0987
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-rn",
+        "name": "R/N Ward (Dahisar)",
+        "centroid_lat": 19.26,
+        "centroid_lon": 72.8599
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.8399,
+              19.240000000000002
+            ],
+            [
+              72.87989999999999,
+              19.240000000000002
+            ],
+            [
+              72.87989999999999,
+              19.28
+            ],
+            [
+              72.8399,
+              19.28
+            ],
+            [
+              72.8399,
+              19.240000000000002
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-pn",
+        "name": "P/N Ward (Malad)",
+        "centroid_lat": 19.1853,
+        "centroid_lon": 72.8359
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.8159,
+              19.165300000000002
+            ],
+            [
+              72.85589999999999,
+              19.165300000000002
+            ],
+            [
+              72.85589999999999,
+              19.2053
+            ],
+            [
+              72.8159,
+              19.2053
+            ],
+            [
+              72.8159,
+              19.165300000000002
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-rc",
+        "name": "R/C Ward (Borivali)",
+        "centroid_lat": 19.2298,
+        "centroid_lon": 72.8471
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.8271,
+              19.2098
+            ],
+            [
+              72.8671,
+              19.2098
+            ],
+            [
+              72.8671,
+              19.2498
+            ],
+            [
+              72.8271,
+              19.2498
+            ],
+            [
+              72.8271,
+              19.2098
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mum-d",
+        "name": "D Ward (Nana Chowk)",
+        "centroid_lat": 18.9622,
+        "centroid_lon": 72.8125
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.7925,
+              18.9422
+            ],
+            [
+              72.8325,
+              18.9422
+            ],
+            [
+              72.8325,
+              18.9822
+            ],
+            [
+              72.7925,
+              18.9822
+            ],
+            [
+              72.7925,
+              18.9422
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

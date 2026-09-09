@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Outcome",
+  "type": "object",
+  "required": [
+    "dispatch_item_id",
+    "status",
+    "recorded_at"
+  ],
+  "properties": {
+    "dispatch_item_id": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "resolved",
+        "escalated",
+        "false_alarm"
+      ]
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "note": {
+      "type": "string"
+    }
+  }
+}

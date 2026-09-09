@@ -1,0 +1,365 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-hadapsar",
+        "name": "Hadapsar-Mundhwa",
+        "centroid_lat": 18.5089,
+        "centroid_lon": 73.926
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.906,
+              18.4889
+            ],
+            [
+              73.946,
+              18.4889
+            ],
+            [
+              73.946,
+              18.5289
+            ],
+            [
+              73.906,
+              18.5289
+            ],
+            [
+              73.906,
+              18.4889
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-wanowrie",
+        "name": "Wanowrie",
+        "centroid_lat": 18.4884,
+        "centroid_lon": 73.8987
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.87870000000001,
+              18.4684
+            ],
+            [
+              73.9187,
+              18.4684
+            ],
+            [
+              73.9187,
+              18.508399999999998
+            ],
+            [
+              73.87870000000001,
+              18.508399999999998
+            ],
+            [
+              73.87870000000001,
+              18.4684
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-bibwewadi",
+        "name": "Bibwewadi",
+        "centroid_lat": 18.4752,
+        "centroid_lon": 73.8562
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.8362,
+              18.4552
+            ],
+            [
+              73.8762,
+              18.4552
+            ],
+            [
+              73.8762,
+              18.4952
+            ],
+            [
+              73.8362,
+              18.4952
+            ],
+            [
+              73.8362,
+              18.4552
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-kondhwa",
+        "name": "Kondhwa-Yewalewadi",
+        "centroid_lat": 18.478,
+        "centroid_lon": 73.8941
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.8741,
+              18.458000000000002
+            ],
+            [
+              73.91409999999999,
+              18.458000000000002
+            ],
+            [
+              73.91409999999999,
+              18.498
+            ],
+            [
+              73.8741,
+              18.498
+            ],
+            [
+              73.8741,
+              18.458000000000002
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-aundh",
+        "name": "Aundh-Baner",
+        "centroid_lat": 18.5602,
+        "centroid_lon": 73.8004
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.7804,
+              18.5402
+            ],
+            [
+              73.82039999999999,
+              18.5402
+            ],
+            [
+              73.82039999999999,
+              18.580199999999998
+            ],
+            [
+              73.7804,
+              18.580199999999998
+            ],
+            [
+              73.7804,
+              18.5402
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-sinhagad",
+        "name": "Sinhagad Road",
+        "centroid_lat": 18.4805,
+        "centroid_lon": 73.825
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.805,
+              18.4605
+            ],
+            [
+              73.845,
+              18.4605
+            ],
+            [
+              73.845,
+              18.5005
+            ],
+            [
+              73.805,
+              18.5005
+            ],
+            [
+              73.805,
+              18.4605
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-shivaji",
+        "name": "Shivajinagar-Ghole Road",
+        "centroid_lat": 18.5326,
+        "centroid_lon": 73.8513
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.8313,
+              18.5126
+            ],
+            [
+              73.87129999999999,
+              18.5126
+            ],
+            [
+              73.87129999999999,
+              18.552599999999998
+            ],
+            [
+              73.8313,
+              18.552599999999998
+            ],
+            [
+              73.8313,
+              18.5126
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-warje",
+        "name": "Warje-Karvenagar",
+        "centroid_lat": 18.482,
+        "centroid_lon": 73.802
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.78200000000001,
+              18.462
+            ],
+            [
+              73.822,
+              18.462
+            ],
+            [
+              73.822,
+              18.502
+            ],
+            [
+              73.78200000000001,
+              18.502
+            ],
+            [
+              73.78200000000001,
+              18.462
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-katraj",
+        "name": "Dhankawadi-Sahakarnagar",
+        "centroid_lat": 18.4575,
+        "centroid_lon": 73.8672
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.8472,
+              18.4375
+            ],
+            [
+              73.88719999999999,
+              18.4375
+            ],
+            [
+              73.88719999999999,
+              18.4775
+            ],
+            [
+              73.8472,
+              18.4775
+            ],
+            [
+              73.8472,
+              18.4375
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-dhanori",
+        "name": "Yerawada-Kalas-Dhanori",
+        "centroid_lat": 18.5907,
+        "centroid_lon": 73.8913
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.8713,
+              18.5707
+            ],
+            [
+              73.9113,
+              18.5707
+            ],
+            [
+              73.9113,
+              18.610699999999998
+            ],
+            [
+              73.8713,
+              18.610699999999998
+            ],
+            [
+              73.8713,
+              18.5707
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

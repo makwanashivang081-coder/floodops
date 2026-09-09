@@ -97,6 +97,26 @@ The engine is city-agnostic. Only the `data/cities/<city>/` folder changes.
 
 ---
 
+## Run locally (MVP)
+
+```bash
+pnpm install
+pnpm --filter @floodops/scoring test
+pnpm dev
+```
+
+Open:
+
+- Admin panel: http://localhost:3000/admin  
+- Citizen report: http://localhost:3000/report  
+- Health: http://localhost:3000/api/health  
+
+Data lives in `data/cities/*`. Scoring + SopRulePlanner live in `packages/scoring`.
+
+UI rules: see `DESIGN.md` (no purple-gradient / Inter / glass-card AI defaults).
+
+---
+
 ## Phases
 
 Aligned to the competition's three stages. See [`docs/03-phases.md`](docs/03-phases.md).
@@ -104,8 +124,8 @@ Aligned to the competition's three stages. See [`docs/03-phases.md`](docs/03-pha
 | Phase | Competition stage | Deliverable |
 |---|---|---|
 | 0 | — | This repo, problem statement, architecture |
-| 1 | Idea submission (by 10 Sep 2026) | Deck PDF, Nugen slide, registration |
-| 2 | Prototype + video (to 15 Nov 2026) | Working engine, Pune end-to-end, Mumbai validation number |
+| 1 | Idea + **compulsory live prototype** (by 10 Sep 2026) | PPT + IDs + **Live Link (must work)** + **Repo (must run)** — no submit without both |
+| 2 | Full prototype + video (to 15 Nov 2026) | Nugen primary · route · outcomes · Mumbai number · video |
 | 3 | Grand Finale, 24h (Jan–Feb 2027) | Hardened live demo; no new features |
 
 ---

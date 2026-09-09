@@ -1,0 +1,28 @@
+spot_name,lat,lon,low_point_score,method
+Bandra Kurla Complex (BKC),19.0606629,72.8546797,0.80,proxy_v1_until_DEM
+Kurla West,19.0686026,72.8765830,0.80,proxy_v1_until_DEM
+Santacruz / Kalina corridor,19.0740097,72.8689943,0.80,proxy_v1_until_DEM
+Dharavi,19.0444630,72.8586177,0.80,proxy_v1_until_DEM
+Mahim Causeway,19.0482556,72.8382392,0.92,proxy_v1_until_DEM
+Andheri subway,19.1192854,72.8469802,0.92,proxy_v1_until_DEM
+Khar subway,19.0695,72.8375,0.92,proxy_v1_until_DEM
+Saki Naka Metro,19.1082060,72.8828404,0.75,proxy_v1_until_DEM
+Nana Chowk,18.9621640,72.8125218,0.80,proxy_v1_until_DEM
+Powai,19.1187195,72.9073476,0.80,proxy_v1_until_DEM
+Dahisar East,19.2599822,72.8598732,0.65,proxy_v1_until_DEM
+Malad West,19.1852851,72.8358611,0.70,proxy_v1_until_DEM
+Borivali West,19.2298129,72.8471376,0.75,proxy_v1_until_DEM
+Vikhroli,19.1114795,72.9280210,0.80,proxy_v1_until_DEM
+Parel,18.9884590,72.8393913,0.85,proxy_v1_until_DEM
+Vile Parle East subway approach,19.0990,72.8440,0.92,proxy_v1_until_DEM
+Santacruz West linking road,19.0810,72.8380,0.70,proxy_v1_until_DEM
+Kurla East LBS dip,19.0750,72.8860,0.80,proxy_v1_until_DEM
+Sion Hospital approach,19.0380,72.8600,0.80,proxy_v1_until_DEM
+King Circle junction,19.0320,72.8570,0.85,proxy_v1_until_DEM
+Grant Road station west,18.9640,72.8140,0.65,proxy_v1_until_DEM
+Churchgate Oval edge,18.9360,72.8260,0.70,proxy_v1_until_DEM
+Kemps Corner dip,18.9628,72.8060,0.75,proxy_v1_until_DEM
+Kandivali East underpass approach,19.2060,72.8730,0.92,proxy_v1_until_DEM
+Goregaon West link road dip,19.1660,72.8490,0.85,proxy_v1_until_DEM
+Chembur west drain mouth,19.0550,72.8910,0.65,proxy_v1_until_DEM
+Ghatkopar Andheri link dip,19.0860,72.9080,0.70,proxy_v1_until_DEM

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "mum-pump-1",
+    "kind": "pump",
+    "name": "Pump unit 1 (BKC depot)",
+    "depot_lat": 19.0607,
+    "depot_lon": 72.8547,
+    "available": true
+  },
+  {
+    "id": "mum-pump-2",
+    "kind": "pump",
+    "name": "Pump unit 2 (Andheri depot)",
+    "depot_lat": 19.1193,
+    "depot_lon": 72.847,
+    "available": true
+  },
+  {
+    "id": "mum-crew-1",
+    "kind": "crew",
+    "name": "Desilt crew A (Kurla)",
+    "depot_lat": 19.0686,
+    "depot_lon": 72.8766,
+    "available": true
+  },
+  {
+    "id": "mum-crew-2",
+    "kind": "crew",
+    "name": "Barricade team B (Dadar)",
+    "depot_lat": 19.0178,
+    "depot_lon": 72.8478,
+    "available": true
+  },
+  {
+    "id": "mum-pump-3",
+    "kind": "pump",
+    "name": "Pump unit 3 (Borivali depot)",
+    "depot_lat": 19.2298,
+    "depot_lon": 72.8471,
+    "available": true
+  }
+]

@@ -16,8 +16,8 @@ Detail docs (not extra diagrams): `01` problem · `03` phases · `04` data · `0
 |---|---|
 | **Actors** | Citizen = sensor. Officer = decision maker. |
 | **Web → API** | Report page + dashboard → use-cases only. |
-| **Externals** | Open-Meteo / tide (live or replay) · Nugen (planning). |
-| **Engine 1→6** | Verify → severity → risk → next-at-risk → Nugen plan → route. |
+| **Externals** | Open-Meteo / tide (live or replay) · **Nugen (planning) — Phase 2 after shortlist**. Phase 1 decks describe planned use only. |
+| **Engine 1→6** | Verify → severity → risk → next-at-risk → **planner (Nugen or SOP rules)** → route. All six ship. Steps 1–4 never need Nugen. Step 5 always returns full actions. |
 | **Git seeds** | Loaded once into PostGIS (`data:load`). |
 | **Storage** | PostGIS = all rows. MinIO/S3 = photo bytes only. |
 | **Output** | Dispatch list + why → outcomes → next season. |
@@ -29,10 +29,12 @@ Detail docs (not extra diagrams): `01` problem · `03` phases · `04` data · `0
 
 ```
 Citizen + Officer + Rain/Tide + Git seeds
-  → web → api → Engine(1–6) ↔ Nugen
+  → web → api → Engine(1–4) ↔ Planner(Nugen | SopRules) → route (6)
   → PostGIS + MinIO
   → Dispatch list → Outcome log
 ```
+
+**Planner policy (nothing dropped):** Nugen aligned model is the primary planner after shortlist credits/invite. Until the key exists — and if the API fails mid-demo — **SopRulePlanner** fills the same schema (`action`, `crew`, `priority`, `explanation`) from SOP rules + risk breakdown. We never ship a product that only ranks spots without actions. Route check and outcome log stay in scope (built after the dashboard, not abandoned).
 
 ---
 
@@ -74,12 +76,8 @@ Citizen + Officer + Rain/Tide + Git seeds
 
 | Phase | Boxes |
 |---|---|
-| 0–1 | This diagram + deck + Nugen slide |
-| 2.0–2.2 | Git → PostGIS · rain live/replay |
-| 2.3–2.4 | Engine 1–3 · citizen → MinIO |
-| 2.5–2.6 | Engine 5–6 · Nugen · dashboard |
-| 2.7 | BMC validation |
-| 2.8–2.9 | Route + outcome (cuttable) |
-| 3 | Same diagram, harden only |
+| 0–1 / MVP-10 | Diagram + deck + **live vertical slice** by 10 Sep |
+| Right after 10 Sep | Nugen signup when invite; thicken data; Mumbai validate |
+| Then | Route + outcome · video · harden |
 
 If it is not in the image, it is out of scope.

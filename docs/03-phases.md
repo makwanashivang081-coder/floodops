@@ -1,10 +1,39 @@
 # Phases
 
-Mapped to the three competition stages of Indradhanu – PCCOE IGC 2026. Dates from the official site; confirm against the portal before each deadline.
+Mapped to Indradhanu – PCCOE IGC 2026. **Team hard gate: working prototype live by 10 Sep 2026** (same day as portal registration). Confirm portal fields each time you open the form.
 
 Each sub-phase has: **Goal · Tasks · Owner · Deliverable · Done when · Risk.** "Done when" is binary. If it can't be checked, it isn't done.
 
+**Build rule:** one slice, one test, then the next slice. Create a folder the week you fill it. If a slice is not demoable (curl, test, or screen), it does not exist.
+
 Roles: **Geo** (data/terrain), **Vision** (intake/photos), **AI** (Nugen/scoring), **Front** (dashboard/deck/video). Team lead is whoever owns the deadline that week.
+
+### Portal vs team target (as of 8 Sep 2026)
+
+Checked on [pccoeigc.com/registration](https://www.pccoeigc.com/registration) Step 3.  
+**Team rule overrides form labels:** Live Link + Code Repository are **compulsory for us**. We do not submit without both working.
+
+| Upload / field | Form label | Our rule for 10 Sep |
+|---|---|---|
+| PPT PDF ≤ 5 MB | Required | **Compulsory** |
+| Combined ID cards PDF ≤ 5 MB | Required | **Compulsory** |
+| Project abstract, domain, topic | Required | **Compulsory** |
+| Live Link URL | Marked optional on site | **COMPULSORY** — working prototype URL must open |
+| Code Repository URL | Marked optional on site | **COMPULSORY** — repo must contain runnable code |
+| NOC | Not needed this round | Skip |
+| Nugen API | Not on form | Planned on PPT; SopRulePlanner runs on the live demo |
+
+**Hard gate 10 Sep:** no Live Link that demos the dispatch loop + no repo = **not ready to submit**.
+
+### Vertical slices (test after each)
+
+| Slice | Working thing | Due |
+|---|---|---|
+| 0 | Docs | Done |
+| **MVP-10** | PPT + IDs + **live demo** + repo | **10 Sep hard** |
+| 2.x full | Route, outcomes, Mumbai number, Nugen primary, video | After shortlist → Nov |
+
+**Scope rule:** full product still ships. By 10 Sep we ship a **vertical MVP** (rain → score → plan → screen). Route, outcomes, Mumbai validation, polish continue immediately after — not dropped.
 
 ---
 
@@ -12,42 +41,27 @@ Roles: **Geo** (data/terrain), **Vision** (intake/photos), **AI** (Nugen/scoring
 
 ```mermaid
 gantt
-    title FloodOps delivery
+    title FloodOps delivery (corrected)
     dateFormat  YYYY-MM-DD
     axisFormat  %d %b
 
-    section Phase 0 · Foundation
-    Repo, PS, architecture               :done, p0, 2026-09-07, 1d
+    section MVP for 10 Sep
+    Deck + IDs                          :crit, m1, 2026-09-08, 2d
+    Boot api+web+seed Pune              :crit, m2, 2026-09-08, 1d
+    Rain + scoring + SopRulePlanner     :crit, m3, 2026-09-08, 1d
+    Report + dashboard live URL         :crit, m4, 2026-09-09, 1d
+    Portal submit                       :crit, m5, 2026-09-09, 1d
+    Hard deadline                       :milestone, 2026-09-10, 0d
 
-    section Phase 1 · Idea submission
-    1.1 Nugen onboarding                 :p11, 2026-09-07, 1d
-    1.2 Name + positioning               :p12, 2026-09-07, 1d
-    1.3 Mockups                          :p13, 2026-09-08, 1d
-    1.4 Deck                             :crit, p14, 2026-09-08, 2d
-    1.5 Paperwork + registration         :crit, p15, 2026-09-09, 1d
-    Registration deadline                :milestone, 2026-09-10, 0d
+    section After shortlist · full product
+    Nugen primary + Mumbai validate     :p2a, 2026-09-15, 20d
+    Route + outcomes + harden           :p2b, 2026-10-05, 25d
+    Prototype video                     :crit, p2v, 2026-10-20, 20d
+    Video / Stage-2 style deadline      :milestone, 2026-11-15, 0d
 
-    section Phase 2 · Prototype
-    Shortlist announced                  :milestone, 2026-09-09, 0d
-    2.0 Project setup                    :p20, 2026-09-15, 3d
-    Nugen alignment workshop             :p2w, 2026-09-15, 5d
-    2.1 Data layer                       :p21, 2026-09-18, 10d
-    2.2 Rain provider + replay           :p22, 2026-09-22, 6d
-    2.3 Scoring engine                   :p23, 2026-09-25, 10d
-    2.4 Citizen intake                   :p24, 2026-10-01, 12d
-    2.5 Nugen planner                    :crit, p25, 2026-09-28, 12d
-    2.6 Officer dashboard                :p26, 2026-10-08, 14d
-    2.7 Mumbai validation                :p27, 2026-10-20, 7d
-    2.8 Route check                      :p28, 2026-10-25, 6d
-    2.9 Outcome log                      :p29, 2026-10-29, 4d
-    2.10 Video + hardening               :crit, p210, 2026-11-03, 12d
-    Prototype video deadline             :milestone, 2026-11-15, 0d
-
-    section Phase 3 · Finale
-    Finalists announced                  :milestone, 2026-12-15, 0d
-    3.1 Demo script + rehearsal          :p31, 2027-01-05, 20d
-    3.2 Resilience hardening             :p32, 2027-01-10, 15d
-    3.3 Finale 24h                       :crit, p33, 2027-01-31, 14d
+    section Finale
+    Finalists                           :milestone, 2026-12-15, 0d
+    Finale 24h                          :crit, p3, 2027-01-31, 14d
 ```
 
 ---
@@ -65,74 +79,59 @@ gantt
 
 ---
 
-## Phase 1 — Idea submission
+## Phase MVP-10 — Working prototype + registration (NOW → 10 Sep)
 
-**Window:** 7 → 10 Sep 2026. **No code.** Submission quality only.
+**Hard gate: 10 Sep 2026.** Deliverables: PPT + IDs + **working live demo** + repo URL + portal submit.
 
-### 1.1 Nugen onboarding
+This is a **thin vertical slice of the full architecture**, not a different product. Every engine box exists; some adapters are simpler (JSON seed, SopRulePlanner, local photos). Full Nugen / route / outcomes / Mumbai overlap continue right after submit — still in scope.
 
-| | |
-|---|---|
-| Goal | Be prize-eligible and able to write a truthful Nugen slide |
-| Tasks | Sign up with institute email, invite `IN2027PCCOE` · obtain API key · read cookbook: one inference call, one alignment example · write 5 lines: what "aligned model" means for SOP-based action planning |
-| Owner | AI |
-| Deliverable | API key in team vault; `docs/nugen-notes.md` (5–10 lines, no marketing) |
-| Done when | One successful inference call from a script on a team laptop |
-| Risk | Waitlist delay → sign up today, not tomorrow |
+### Hour-by-hour (8–10 Sep)
 
-### 1.2 Name + positioning
+| When | Build | Done when |
+|---|---|---|
+| **Day 1 morning** | Name + one-liner; deck draft in parallel | Name locked; slide outline exists |
+| **Day 1** | `pnpm` api + web; SQLite or PostGIS; seed **Pune** spots + blackspots CSV | `GET /health`, `GET /cities/pune/spots` |
+| **Day 1 night** | Open-Meteo or replay JSON; `packages/scoring` risk + credibility stubs; **SopRulePlanner** full actions | `POST /dispatch/generate` returns place→action→crew→why |
+| **Day 2** | `/report` photo upload (disk); `/dashboard` list + why panel; deploy (Vercel/Railway/etc.) | Live URL works on a phone |
+| **Day 2 night** | PPT PDF ≤ 5 MB; ID PDF; fill portal; paste Live Link + Repo | Portal = submitted **before** 10 Sep night if possible |
+| **Day 3 buffer** | Fix demo bugs only; screenshot confirmation | Hard deadline |
 
-| | |
-|---|---|
-| Goal | Replace working name; one sentence everyone repeats identically |
-| Tasks | Pick a name (short, pronounceable, not "360", not "AI") · finalise tagline · find-and-replace `FloodOps` in repo |
-| Owner | Team lead |
-| Deliverable | Name in README, deck, registration form — identical spelling |
-| Done when | Four people say the one-liner the same way |
-| Risk | Bikeshedding → 30-minute cap, then lead decides |
+### MVP-10 must include (nothing faked as “done later” on the live URL)
 
-### 1.3 Mockups
+1. Citizen can submit a report (photo + location)  
+2. Officer sees ranked dispatch list with **action + crew + why** (SopRulePlanner)  
+3. Rain signal live or **REPLAY**-labelled  
+4. Honesty: Nugen marked **planned primary**; SOP rules running now  
+5. Repo README: how to run locally  
 
-| | |
-|---|---|
-| Goal | Show the officer's screen so judges see a product, not a concept |
-| Tasks | Three static screens: (a) ranked dispatch list with one "why" panel open, (b) citizen report page with credibility result, (c) replay toggle + rain overlay on ward map · label every screen **MOCKUP** |
-| Owner | Front |
-| Deliverable | 3 PNGs in `docs/mockups/` |
-| Done when | A stranger can say what the officer does on each screen without narration |
-| Risk | Over-polishing → grayscale wireframes are enough |
+### MVP-10 may be thinner (still on roadmap for week after)
 
-### 1.4 Deck
+- Mumbai validation number  
+- Full DEM pipeline  
+- Route check  
+- Outcome log  
+- Real Nugen API (swap in when invite/credits arrive)  
 
-| | |
-|---|---|
-| Goal | Get shortlisted |
-| Tasks | 8 slides, PDF, ≤ 5 MB: 1 Problem (paragraph + six gaps) · 2 Why now · 3 Problem flow → solution flow · 4 Mockups · 5 Data — honesty table unchanged · 6 **Nugen** — what the aligned model does, why alignment beats a generic LLM here, where it sits (planning, not scoring) · 7 Mumbai validation → Pune demo → any city · 8 Team + roles · every claim reviewed against the "words we do not use" table |
-| Owner | Front (build), all (review) |
-| Deliverable | `Deck-v1.pdf` linked from README (not committed) |
-| Done when | Each slide survives: "can we defend this in Q&A with what we actually have?" |
-| Risk | Slide 6 sounds like an ad → describe input, output, and failure fallback, nothing else |
+**Not dropped — scheduled immediately after 10 Sep.**
 
-### 1.5 Paperwork + registration
+### Parallel: deck + paperwork (same window)
 
-| | |
-|---|---|
-| Goal | Zero rejections on formalities |
-| Tasks | Combined ID cards → single PDF ≤ 5 MB · faculty mentor name + email + phone · fill form: team, members, institute, domain **Disaster Resilience**, topic **Disaster Forecasting & Response**, title, tagline, short abstract from `docs/01`, repo URL · screenshot confirmation |
-| Owner | Team lead |
-| Deliverable | Confirmation screenshot in team chat |
-| Done when | Portal shows submitted status |
-| Risk | 5 MB limit → compress PDFs before the last hour |
+| Task | Owner | Done when |
+|---|---|---|
+| Deck PDF ≤ 5 MB (Nugen planned primary + SOP stand-in) | Front | File ready |
+| Combined ID cards PDF ≤ 5 MB | Lead | File ready |
+| Mentor details | Lead | On form |
+| Portal: Disaster Resilience · Disaster Forecasting & Response · abstract · live + repo | Lead | Submitted screenshot |
 
-**Phase 1 gate:** submitted 24 h before deadline. Not on the deadline.
+**Phase MVP-10 gate:** live URL shows the dispatch loop; portal submitted; PPT matches what the live URL can do.
 
 ---
 
-## Phase 2 — Prototype and video
+## Phase 2 — Full product after 10 Sep (nothing dropped)
 
-**Window:** shortlist (≈ 9 Sep) → 15 Nov 2026. Build strictly in order. 2.0–2.6 are the prototype. 2.7 is the accuracy claim. 2.8–2.9 are cuttable.
+**Window:** 10 Sep submit → 15 Nov 2026. Continue from the MVP — harden and fill remaining boxes. **Full product scope:** route, outcomes, Mumbai number, Nugen primary, video all ship.
 
-**Nugen credit milestones (from the rules):** shortlisted teams receive credits by 1 Oct on submitting a project using aligned-model inference; full use through 15 Nov unlocks more. → **2.5 must produce a real plan by ~30 Sep.**
+**Nugen credit milestones (from the rules):** shortlisted teams receive credits by ~1 Oct on submitting a project using aligned-model inference; full use through 15 Nov unlocks more. → Signup/invite only **after shortlist**. **2.5 must produce a real plan by ~30 Sep.**
 
 ### 2.0 Project setup
 
@@ -144,6 +143,17 @@ gantt
 | Deliverable | `pnpm dev` starts api + web + db on a clean machine |
 | Done when | CI green on an empty commit; a deliberate cross-layer import fails lint |
 | Risk | Tooling rabbit hole → 3 days cap, no custom build magic |
+
+### 2.0b Nugen onboarding (after shortlist only)
+
+| | |
+|---|---|
+| Goal | Unlock credits / prize track and write truthful integration notes |
+| Tasks | Sign up with institute email · enter invite code organisers give (e.g. `IN2027PCCOE` if still valid) · obtain API key into team vault (not git) · one successful inference call · read alignment cookbook · write `docs/nugen-notes.md` (5–10 lines: aligned model = SOP planning, not risk) · attend alignment workshop when scheduled |
+| Owner | AI |
+| Deliverable | API key in vault; `docs/nugen-notes.md` |
+| Done when | One successful inference from a team laptop |
+| Risk | Waiting on organiser invite → keep building 2.0–2.4; use **SopRulePlanner** for actions until key exists, then attach Nugen as primary |
 
 ### 2.1 Data layer
 
@@ -189,16 +199,16 @@ gantt
 | Done when | Test set: 20 flood photos, 20 non-flood, 5 duplicates → water detection ≥ 85 %, duplicates 5/5 caught, stripped-EXIF photos get lower score not rejection |
 | Risk | EXIF stripped by browsers → in-app capture path; vision model accuracy → report the number honestly, never say "fake detection" |
 
-### 2.5 Nugen planner
+### 2.5 Dual planner (Nugen + SOP rules — nothing dropped)
 
 | | |
 |---|---|
-| Goal | Aligned model turns ranked spots + crews + SOPs into a structured, validated plan |
-| Tasks | `data/sop/`: NDMA urban flooding guidelines + municipal SOP excerpts, chunked · attend Nugen alignment workshop; align on SOP corpus · `Planner` port · `NugenPlanner` adapter: input = ranked spots with breakdowns, crews, city context; output = `DispatchPlan` · zod schema for output; reject and retry once on invalid · `NoopPlanner`: returns ranked list without actions · prompt/alignment artefacts versioned in repo · log every call (input hash, latency, valid/invalid) |
+| Goal | Every dispatch item always gets action + crew + priority + explanation. Nugen is primary when available; SOP rules cover the gap so we never ship an empty plan. |
+| Tasks | `data/sop/`: NDMA + municipal SOP excerpts, chunked · `Planner` port · **`SopRulePlanner`**: deterministic map from severity/risk/blackspot → `pump` / `desilt` / `barricade` / `monitor` + nearest available crew + template explanation using breakdown numbers · **`NugenPlanner`**: same input/output schema, aligned on SOP corpus when invite/credits exist · zod validate both · prefer Nugen when key + healthy; else SopRulePlanner · log provider used on every plan · attend Nugen workshop when offered · invite signup as soon as shortlist email arrives · optional: request demo credits at nugen.in if invite is slow |
 | Owner | AI |
-| Deliverable | `GenerateDispatchPlan` use-case producing plan with `action`, `crew`, `priority`, `explanation` per spot |
-| Done when | 10 replayed scenarios → 10 valid plans; actions are from the SOP vocabulary only; explanations reference the breakdown numbers; Nugen down → Noop path renders |
-| Risk | Model hallucinating actions → schema enum + SOP-only vocabulary; latency → plan generation is async, UI shows last plan + "updating" |
+| Deliverable | `GenerateDispatchPlan` always returns full plan rows (never priority-only) |
+| Done when | 10 replay scenarios → 10 valid full plans with **either** provider; switching `PLANNER=nugen|sop-rules` needs zero UI change; Nugen path used in at least one recorded demo before video |
+| Risk | Invite late → SopRulePlanner is still a real planner (not a blank list). Nugen stays in architecture and PPT as the aligned-model path. |
 
 ### 2.6 Officer dashboard
 
@@ -297,21 +307,25 @@ gantt
 
 ---
 
-## Cut list (pre-decided, in order)
+## Full scope (nothing dropped)
 
-1. 2.9 Outcome log → roadmap slide
-2. 2.8 Route check → `route_ok` shown as "not assessed"
-3. Next-at-risk (part of 2.3) → remove from UI, keep in code
-4. Mumbai tide input → rain-only for Mumbai
-5. Dashboard polish
+Every feature below is **in the product**. Order is build sequence only.
 
-**Never cut:** 2.1–2.6, 2.7's number, the honesty table, replay labelling.
+| Order | Feature | If blocked |
+|---|---|---|
+| 1 | Data + rain + scoring + photos + dashboard + Mumbai number | — core path |
+| 2 | **Planner** | Primary = Nugen. Stand-in = **SopRulePlanner** (same JSON). Never ship blank actions. |
+| 3 | Route check | Build after dashboard; still required before video |
+| 4 | Outcome log | Build after route; still required before video |
+| 5 | Tide, next-at-risk UI, polish | Parallel when core is green |
+
+**Resilience (not a substitute for features):** if Nugen fails *during a live demo*, fall back to SopRulePlanner for that request. That is uptime, not scope cut.
 
 ---
 
 ## Weekly rhythm (Phase 2)
 
-- Monday 30 min: what's blocked, what's cut.
+- Monday 30 min: what's blocked, who unblocks it (never “drop it”).
 - Every push: CI green or it doesn't merge.
 - Friday: demo on `main` to each other, 5 minutes, from a clean clone.
-- Anything not demoable on Friday doesn't exist.
+- Anything not demoable on Friday is next week's first job — still in scope.

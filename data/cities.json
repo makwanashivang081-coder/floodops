@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "pune",
+    "name": "Pune",
+    "coastal": false,
+    "centroid": { "lat": 18.5204, "lon": 73.8567 },
+    "demo_role": "demonstration"
+  },
+  {
+    "slug": "mumbai",
+    "name": "Mumbai",
+    "coastal": true,
+    "centroid": { "lat": 19.0760, "lon": 72.8777 },
+    "demo_role": "validation"
+  }
+]

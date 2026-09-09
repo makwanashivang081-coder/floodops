@@ -21,7 +21,7 @@ Every input, its status, its source, and what happens if it is missing. If a sou
 | Road graph | OpenStreetMap | Free | For route checks only. Storm drains are mostly absent in OSM — not modelled. |
 | Historical blackspots — Mumbai | BMC annual chronic flooding-spot list | Public (news, BMC releases) | ~300–400 spots. Also our **validation ground truth**. |
 | Historical blackspots — Pune | PMC PDFs, news archives (2019 Ambil Odha, Sinhagad Rd, Katraj, Baner) | Public, scattered | ~40–100 spots, hand-curated with a `source` column per row. |
-| Flood-response SOP corpus | NDMA urban flooding guidelines, municipal SOPs | Public PDFs | Basis for Nugen alignment. Stored under `data/sop/`. |
+| Flood-response SOP corpus | NDMA urban flooding guidelines, municipal SOPs | Public PDFs | Basis for Nugen alignment **after shortlist**. Stored under `data/sop/`. Nugen itself is not a Phase 1 dependency. |
 
 ## Not available (and what we do instead)
 

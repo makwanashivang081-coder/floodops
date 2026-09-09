@@ -1,0 +1,13 @@
+{
+  "city": "pune",
+  "rain_mode": "replay",
+  "replay_file": "peak.json",
+  "assets_from": "assets.seed.json",
+  "sample_reports": [
+    {
+      "spot_name": "Sinhagad Road \u2013 Vitthalwadi underpass",
+      "severity_hint": "impassable",
+      "note": "Demo report \u2014 replace with live phone capture on stage"
+    }
+  ]
+}

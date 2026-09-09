@@ -1,0 +1,11 @@
+# Keep local-only junk out of the Vercel upload if using CLI
+.tmp
+tmp-*
+.vercel
+node_modules
+**/.next
+**/dist
+uploads
+data/raw
+*.tif
+*.hgt

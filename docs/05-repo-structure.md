@@ -158,7 +158,8 @@ FloodOps/                          # rename when name is locked
 │   │       │   └── public-tide.provider.ts
 │   │       ├── planner/
 │   │       │   ├── nugen.planner.ts
-│   │       │   └── noop.planner.ts
+│   │       │   ├── sop-rule.planner.ts   # same schema; used until/alongside Nugen
+│   │       │   └── noop.planner.ts       # emergency only: never default product path
 │   │       ├── photo/
 │   │       │   ├── s3.photo-store.ts
 │   │       │   └── local-disk.photo-store.ts

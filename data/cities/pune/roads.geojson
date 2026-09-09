@@ -1,0 +1,159 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-road-1",
+        "name": "Sinhagad Road spine",
+        "osm_id": "seed-1"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.82,
+            18.475
+          ],
+          [
+            73.825,
+            18.48
+          ],
+          [
+            73.835,
+            18.49
+          ],
+          [
+            73.85,
+            18.5
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-road-2",
+        "name": "Baner Road",
+        "osm_id": "seed-2"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.77,
+            18.56
+          ],
+          [
+            73.8,
+            18.56
+          ],
+          [
+            73.82,
+            18.55
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-road-3",
+        "name": "Hadapsar Mundhwa",
+        "osm_id": "seed-3"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.92,
+            18.52
+          ],
+          [
+            73.935,
+            18.525
+          ],
+          [
+            73.95,
+            18.535
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-road-4",
+        "name": "Satara Road",
+        "osm_id": "seed-4"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.855,
+            18.46
+          ],
+          [
+            73.856,
+            18.475
+          ],
+          [
+            73.857,
+            18.49
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-road-5",
+        "name": "Karve Road",
+        "osm_id": "seed-5"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.8,
+            18.5
+          ],
+          [
+            73.82,
+            18.51
+          ],
+          [
+            73.84,
+            18.52
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pune-road-6",
+        "name": "Nagar Road",
+        "osm_id": "seed-6"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.88,
+            18.56
+          ],
+          [
+            73.9,
+            18.57
+          ],
+          [
+            73.92,
+            18.58
+          ]
+        ]
+      }
+    }
+  ]
+}

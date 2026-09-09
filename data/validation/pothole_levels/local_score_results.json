@@ -1,0 +1,105 @@
+{
+  "scoredAt": "2026-09-09T09:53:32.128Z",
+  "rows": [
+    {
+      "file": "pothole-01-level1-minor.jpg",
+      "expected": 1,
+      "waterDetected": false,
+      "waterScore": 0.014,
+      "damageScore": 0.01,
+      "damageLevel": 1,
+      "match": true,
+      "riskBand": "minor"
+    },
+    {
+      "file": "pothole-02-level1-minor.jpg",
+      "expected": 1,
+      "waterDetected": true,
+      "waterScore": 0.295,
+      "damageScore": 0.086,
+      "damageLevel": 1,
+      "match": true,
+      "riskBand": "minor"
+    },
+    {
+      "file": "pothole-03-level2-low.jpg",
+      "expected": 2,
+      "waterDetected": false,
+      "waterScore": 0.115,
+      "damageScore": 0.106,
+      "damageLevel": 2,
+      "match": true,
+      "riskBand": "low"
+    },
+    {
+      "file": "pothole-04-level2-low.jpg",
+      "expected": 2,
+      "waterDetected": false,
+      "waterScore": 0.118,
+      "damageScore": 0.089,
+      "damageLevel": 2,
+      "match": true,
+      "riskBand": "low"
+    },
+    {
+      "file": "pothole-05-level3-moderate.jpg",
+      "expected": 3,
+      "waterDetected": false,
+      "waterScore": 0.151,
+      "damageScore": 0.184,
+      "damageLevel": 3,
+      "match": true,
+      "riskBand": "moderate"
+    },
+    {
+      "file": "pothole-06-level3-moderate.jpg",
+      "expected": 3,
+      "waterDetected": false,
+      "waterScore": 0.198,
+      "damageScore": 0.37,
+      "damageLevel": 3,
+      "match": true,
+      "riskBand": "moderate"
+    },
+    {
+      "file": "pothole-07-level4-severe.jpg",
+      "expected": 4,
+      "waterDetected": true,
+      "waterScore": 0.334,
+      "damageScore": 0.596,
+      "damageLevel": 4,
+      "match": true,
+      "riskBand": "severe"
+    },
+    {
+      "file": "pothole-08-level4-severe.jpg",
+      "expected": 4,
+      "waterDetected": true,
+      "waterScore": 0.32,
+      "damageScore": 0.395,
+      "damageLevel": 4,
+      "match": true,
+      "riskBand": "severe"
+    },
+    {
+      "file": "pothole-09-level5-critical.jpg",
+      "expected": 5,
+      "waterDetected": false,
+      "waterScore": 0.173,
+      "damageScore": 0.727,
+      "damageLevel": 5,
+      "match": true,
+      "riskBand": "critical"
+    },
+    {
+      "file": "pothole-10-level5-critical-wet.jpg",
+      "expected": 5,
+      "waterDetected": true,
+      "waterScore": 0.471,
+      "damageScore": 0.529,
+      "damageLevel": 5,
+      "match": true,
+      "riskBand": "critical"
+    }
+  ]
+}

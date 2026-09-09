@@ -99,6 +99,8 @@ Nugen's aligned model receives the scored, ranked spots plus crew availability a
 
 Output is validated against a schema before it reaches the UI. If the model returns something unparseable, the officer sees the ranked list without actions rather than a broken screen.
 
+**When Nugen exists:** after Stage 1 shortlist (invite / credits / workshop), or earlier if demo credits work. **Until then we do not leave planning empty** — `SopRulePlanner` returns the same `DispatchPlan` schema from SOP rules + breakdown numbers. Nugen becomes primary the day the key works. Mid-demo API failure → same SopRulePlanner fallback. Phase 1 decks say **planned Nugen primary + SOP-rule stand-in**, not “we drop actions.”
+
 ---
 
 ## 3. Code layers (clean architecture)

@@ -1,0 +1,15 @@
+{
+  "name": "floodops",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "pnpm --filter @floodops/web dev",
+    "build": "pnpm --filter @floodops/scoring build && pnpm --filter @floodops/web build",
+    "typecheck": "pnpm -r typecheck",
+    "test:data": "python scripts/test_data_phase.py all",
+    "test:scoring": "pnpm --filter @floodops/scoring test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

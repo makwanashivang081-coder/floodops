@@ -1,0 +1,8 @@
+{
+  "terrain": 0.25,
+  "blackspot": 0.25,
+  "rain_3h": 0.30,
+  "tide": 0.10,
+  "verified_reports": 0.10,
+  "notes": "Weights sum to 1.0. Tune once on Mumbai validation only — never on Pune demo city."
+}

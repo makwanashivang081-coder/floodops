@@ -1,0 +1,28 @@
+name,lat,lon,since_year,ward_hint,source_url,notes
+Bandra Kurla Complex (BKC),19.0606629,72.8546797,2015,H/E,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Mithi catchment chronic cluster (BMC Flood Preparedness 2026 coverage)
+Kurla West,19.0686026,72.8765830,2015,L,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Mithi catchment
+Santacruz / Kalina corridor,19.0740097,72.8689943,2015,H/E,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Mithi catchment
+Dharavi,19.0444630,72.8586177,2015,G/N,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Mithi catchment
+Mahim Causeway,19.0482556,72.8382392,2015,G/N,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Mithi / tide interaction
+Andheri subway,19.1192854,72.8469802,2020,K/E,https://www.mumbailive.com/en/civic/mumbai-see-10-rise-in-flood-prone-spots-to-498-in-a-year-92004,Named pending permanent mitigation
+Khar subway,19.0695,72.8375,2020,H/W,https://www.mumbailive.com/en/civic/mumbai-see-10-rise-in-flood-prone-spots-to-498-in-a-year-92004,Named pending permanent mitigation; approx geocode
+Saki Naka Metro,19.1082060,72.8828404,2024,K/E,https://www.mumbailive.com/en/civic/mumbai-see-10-rise-in-flood-prone-spots-to-498-in-a-year-92004,Named chronic / lagging works
+Nana Chowk,18.9621640,72.8125218,2020,D,https://www.mumbailive.com/en/civic/mumbai-see-10-rise-in-flood-prone-spots-to-498-in-a-year-92004,Named chronic hotspot
+Powai,19.1187195,72.9073476,2015,S,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Mithi / lake catchment
+Dahisar East,19.2599822,72.8598732,2020,R/N,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Dahisar river catchment
+Malad West,19.1852851,72.8358611,2020,P/N,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Poisar / NW Mumbai cluster
+Borivali West,19.2298129,72.8471376,2020,R/C,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Dahisar / NW Mumbai cluster
+Vikhroli,19.1114795,72.9280210,2025,S,https://indianexpress.com/article/cities/mumbai/bmc-mumbai-flooding-spots-rise-monsoon-mitigation-mithi-river-budget-10570332/,IE 2025–26 flooding-spot coverage
+Parel,18.9884590,72.8393913,2025,E,https://indianexpress.com/article/cities/mumbai/bmc-mumbai-flooding-spots-rise-monsoon-mitigation-mithi-river-budget-10570332/,IE named corridor
+Vile Parle East subway approach,19.0990,72.8440,2024,K/E,https://indianexpress.com/article/cities/mumbai/bmc-mumbai-flooding-spots-rise-monsoon-mitigation-mithi-river-budget-10570332/,IE named corridor family
+Santacruz West linking road,19.0810,72.8380,2023,H/W,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Western suburb waterlogging
+Kurla East LBS dip,19.0750,72.8860,2018,L,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,Mithi catchment
+Sion Hospital approach,19.0380,72.8600,2019,F/N,https://indianexpress.com/article/cities/mumbai/bmc-mumbai-flooding-spots-rise-monsoon-mitigation-mithi-river-budget-10570332/,Central flood corridor
+King Circle junction,19.0320,72.8570,2020,F/N,https://indianexpress.com/article/cities/mumbai/bmc-mumbai-flooding-spots-rise-monsoon-mitigation-mithi-river-budget-10570332/,Traffic waterlogging
+Grant Road station west,18.9640,72.8140,2022,D,https://www.mumbailive.com/en/civic/mumbai-see-10-rise-in-flood-prone-spots-to-498-in-a-year-92004,South Mumbai cluster
+Churchgate Oval edge,18.9360,72.8260,2026,A,https://indianexpress.com/article/cities/mumbai/bmc-mumbai-flooding-spots-rise-monsoon-mitigation-mithi-river-budget-10570332/,South Mumbai additions reported in 2026 coverage
+Kemps Corner dip,18.9628,72.8060,2026,D,https://indianexpress.com/article/cities/mumbai/bmc-mumbai-flooding-spots-rise-monsoon-mitigation-mithi-river-budget-10570332/,South Mumbai additions
+Kandivali East underpass approach,19.2060,72.8730,2021,R/S,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,NW Poisar catchment family
+Goregaon West link road dip,19.1660,72.8490,2022,P/S,https://www.mid-day.com/mumbai/mumbai-news/article/bmc-maps-mumbais-worst-waterlogging-hotspots-ahead-of-monsoon--23643205,NW waterlogging
+Chembur west drain mouth,19.0550,72.8910,2020,M/W,https://indianexpress.com/article/cities/mumbai/bmc-mumbai-flooding-spots-rise-monsoon-mitigation-mithi-river-budget-10570332/,Eastern suburb
+Ghatkopar Andheri link dip,19.0860,72.9080,2021,N,https://indianexpress.com/article/cities/mumbai/bmc-mumbai-flooding-spots-rise-monsoon-mitigation-mithi-river-budget-10570332/,Eastern corridor

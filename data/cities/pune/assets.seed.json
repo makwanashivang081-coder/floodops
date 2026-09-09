@@ -1,0 +1,42 @@
+[
+  {
+    "id": "pune-pump-1",
+    "kind": "pump",
+    "name": "Pump unit 1 (Warje depot)",
+    "depot_lat": 18.482,
+    "depot_lon": 73.802,
+    "available": true
+  },
+  {
+    "id": "pune-pump-2",
+    "kind": "pump",
+    "name": "Pump unit 2 (Hadapsar depot)",
+    "depot_lat": 18.509,
+    "depot_lon": 73.926,
+    "available": true
+  },
+  {
+    "id": "pune-crew-1",
+    "kind": "crew",
+    "name": "Desilt crew A (Swargate)",
+    "depot_lat": 18.5005,
+    "depot_lon": 73.8529,
+    "available": true
+  },
+  {
+    "id": "pune-crew-2",
+    "kind": "crew",
+    "name": "Barricade team B (Shivajinagar)",
+    "depot_lat": 18.5326,
+    "depot_lon": 73.8513,
+    "available": true
+  },
+  {
+    "id": "pune-pump-3",
+    "kind": "pump",
+    "name": "Pump unit 3 (Baner depot)",
+    "depot_lat": 18.5602,
+    "depot_lon": 73.8004,
+    "available": false
+  }
+]

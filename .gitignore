@@ -16,10 +16,17 @@ data/raw/
 *.tif
 *.hgt
 
-# demo uploads
-uploads/
+# demo uploads (repo root only — do not ignore API route apps/web/src/app/api/uploads)
+/uploads/
 
-# OS / editor
+# local scratch / smoke-test junk
+tmp-*.jpg
+tmp-*.json
+tmp-*.png
+tmp-*.webp
+
+# vercel / OS / editor
+.vercel
 .DS_Store
 Thumbs.db
 .vscode/

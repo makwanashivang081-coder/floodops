@@ -1,0 +1,20 @@
+[
+  {
+    "id": "pune-depot-warje",
+    "name": "Warje depot",
+    "lat": 18.482,
+    "lon": 73.802
+  },
+  {
+    "id": "pune-depot-hadapsar",
+    "name": "Hadapsar depot",
+    "lat": 18.509,
+    "lon": 73.926
+  },
+  {
+    "id": "pune-depot-baner",
+    "name": "Baner depot",
+    "lat": 18.5602,
+    "lon": 73.8004
+  }
+]

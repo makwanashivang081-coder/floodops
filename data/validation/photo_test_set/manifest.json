@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "flood-01",
+      "label": "flood",
+      "path": "pending/flood-01.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-02",
+      "label": "flood",
+      "path": "pending/flood-02.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-03",
+      "label": "flood",
+      "path": "pending/flood-03.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-04",
+      "label": "flood",
+      "path": "pending/flood-04.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-05",
+      "label": "flood",
+      "path": "pending/flood-05.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-06",
+      "label": "flood",
+      "path": "pending/flood-06.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-07",
+      "label": "flood",
+      "path": "pending/flood-07.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-08",
+      "label": "flood",
+      "path": "pending/flood-08.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-09",
+      "label": "flood",
+      "path": "pending/flood-09.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-10",
+      "label": "flood",
+      "path": "pending/flood-10.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-11",
+      "label": "flood",
+      "path": "pending/flood-11.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-12",
+      "label": "flood",
+      "path": "pending/flood-12.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-13",
+      "label": "flood",
+      "path": "pending/flood-13.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-14",
+      "label": "flood",
+      "path": "pending/flood-14.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-15",
+      "label": "flood",
+      "path": "pending/flood-15.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-16",
+      "label": "flood",
+      "path": "pending/flood-16.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-17",
+      "label": "flood",
+      "path": "pending/flood-17.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-18",
+      "label": "flood",
+      "path": "pending/flood-18.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-19",
+      "label": "flood",
+      "path": "pending/flood-19.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "flood-20",
+      "label": "flood",
+      "path": "pending/flood-20.jpg",
+      "notes": "Collect real flood photo; placeholder slot"
+    },
+    {
+      "id": "dry-01",
+      "label": "dry",
+      "path": "pending/dry-01.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-02",
+      "label": "dry",
+      "path": "pending/dry-02.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-03",
+      "label": "dry",
+      "path": "pending/dry-03.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-04",
+      "label": "dry",
+      "path": "pending/dry-04.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-05",
+      "label": "dry",
+      "path": "pending/dry-05.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-06",
+      "label": "dry",
+      "path": "pending/dry-06.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-07",
+      "label": "dry",
+      "path": "pending/dry-07.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-08",
+      "label": "dry",
+      "path": "pending/dry-08.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-09",
+      "label": "dry",
+      "path": "pending/dry-09.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-10",
+      "label": "dry",
+      "path": "pending/dry-10.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-11",
+      "label": "dry",
+      "path": "pending/dry-11.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-12",
+      "label": "dry",
+      "path": "pending/dry-12.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-13",
+      "label": "dry",
+      "path": "pending/dry-13.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-14",
+      "label": "dry",
+      "path": "pending/dry-14.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-15",
+      "label": "dry",
+      "path": "pending/dry-15.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-16",
+      "label": "dry",
+      "path": "pending/dry-16.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-17",
+      "label": "dry",
+      "path": "pending/dry-17.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-18",
+      "label": "dry",
+      "path": "pending/dry-18.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-19",
+      "label": "dry",
+      "path": "pending/dry-19.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dry-20",
+      "label": "dry",
+      "path": "pending/dry-20.jpg",
+      "notes": "Collect dry street photo; placeholder slot"
+    },
+    {
+      "id": "dup-01",
+      "label": "duplicate",
+      "path": "pending/dup-01.jpg",
+      "notes": "Duplicate of a flood-* within 200m / 24h",
+      "duplicate_of": "flood-01"
+    },
+    {
+      "id": "dup-02",
+      "label": "duplicate",
+      "path": "pending/dup-02.jpg",
+      "notes": "Duplicate of a flood-* within 200m / 24h",
+      "duplicate_of": "flood-02"
+    },
+    {
+      "id": "dup-03",
+      "label": "duplicate",
+      "path": "pending/dup-03.jpg",
+      "notes": "Duplicate of a flood-* within 200m / 24h",
+      "duplicate_of": "flood-03"
+    },
+    {
+      "id": "dup-04",
+      "label": "duplicate",
+      "path": "pending/dup-04.jpg",
+      "notes": "Duplicate of a flood-* within 200m / 24h",
+      "duplicate_of": "flood-04"
+    },
+    {
+      "id": "dup-05",
+      "label": "duplicate",
+      "path": "pending/dup-05.jpg",
+      "notes": "Duplicate of a flood-* within 200m / 24h",
+      "duplicate_of": "flood-05"
+    }
+  ],
+  "status": "slots_ready_images_pending"
+}
