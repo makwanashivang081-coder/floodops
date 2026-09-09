@@ -7,6 +7,19 @@ This is intentionally thinner than a generic data platform (e.g. PortSense Layer
 
 ---
 
+## Decision (locked for the team)
+
+| Question | Decision |
+|---|---|
+| Postgres **and** PostGIS? | **Yes as one stack** when we leave MVP — Postgres = rows; PostGIS = geometry extension on that same DB. Not two products. |
+| Need them for Stage 1 live demo? | **No.** Current live app uses git seeds + in-memory reports + disk/`/tmp` photos (Vercel). |
+| S3 **and** MinIO both? | **No.** Same photo job. Use **one** S3-compatible backend: local disk (now) → MinIO *or* cloud S3/Blob later. Never both at once. |
+
+**MVP (shipped):** git `data/` + process memory + `LocalDisk` / Vercel `/tmp`.  
+**Next persistence step:** managed Postgres+PostGIS + one object adapter (`S3PhotoStore` pointing at MinIO locally or S3/Blob in cloud).
+
+---
+
 ## Three stores. That's all.
 
 ```mermaid
@@ -17,18 +30,18 @@ flowchart TB
         MIG[packages/database/migrations/<br/>schema history]
     end
 
-    subgraph PG["2. PostgreSQL + PostGIS — system of record"]
+    subgraph PG["2. PostgreSQL + PostGIS — system of record (next)"]
         GEO[Geo layer<br/>cities · wards · spots · roads]
         OPS[Ops layer<br/>reports · crews · rain_snapshots · plans · outcomes]
         META[Meta layer<br/>nugen_calls · validation_runs]
     end
 
-    subgraph OBJ["3. Object storage — MinIO / S3"]
+    subgraph OBJ["3. Object storage — one S3-compatible backend"]
         PHOTOS[report photos<br/>immutable blobs]
         RAW[optional: raw DEM tiles<br/>never in git]
     end
 
-    CITY -->|load once / on deploy| GEO
+    CITY -->|MVP: read at runtime · later: data:load| GEO
     SOP -->|read at plan time| META
     PHOTOS -->|photo_key reference| OPS
 ```
@@ -306,10 +319,11 @@ Reads never invent a second copy of write data.
 
 ## Local vs deploy
 
-| Environment | Postgres | Object storage |
+| Environment | Structured data | Photo bytes |
 |---|---|---|
-| Dev | Docker Compose PostGIS | MinIO in Compose (or local `uploads/` disk adapter) |
-| Demo / finale | Same Compose on laptop, or one small managed Postgres | MinIO local or single S3 bucket |
+| **MVP (now)** | Git `data/` + in-memory reports/assets | Local `uploads/` or Vercel `/tmp` |
+| Dev (next) | Docker Compose **Postgres+PostGIS** | **One** of: local disk, or MinIO (S3 API) |
+| Cloud / finale | Managed Postgres+PostGIS (e.g. Neon) | **One** of: S3 or Vercel Blob (S3-compatible client) |
 | Secrets | `.env` only | keys never in git |
 
-`PhotoStore` port has two adapters: `LocalDiskPhotoStore`, `S3PhotoStore`. Same key scheme either way.
+`PhotoStore` port: `LocalDiskPhotoStore` now; later `S3PhotoStore` aimed at **either** MinIO **or** cloud S3/Blob — same code, different endpoint. **Do not run MinIO and S3 together.**

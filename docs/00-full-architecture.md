@@ -18,8 +18,9 @@ Detail docs (not extra diagrams): `01` problem · `03` phases · `04` data · `0
 | **Web → API** | Report page + dashboard → use-cases only. |
 | **Externals** | Open-Meteo / tide (live or replay) · **Nugen (planning) — Phase 2 after shortlist**. Phase 1 decks describe planned use only. |
 | **Engine 1→6** | Verify → severity → risk → next-at-risk → **planner (Nugen or SOP rules)** → route. All six ship. Steps 1–4 never need Nugen. Step 5 always returns full actions. |
-| **Git seeds** | Loaded once into PostGIS (`data:load`). |
-| **Storage** | PostGIS = all rows. MinIO/S3 = photo bytes only. |
+| **Git seeds** | Curated CSVs/GeoJSON under `data/` (loaded at runtime; later `data:load` into PostGIS). |
+| **Storage (MVP now)** | Git seeds + in-memory ops state + local/tmp photo disk. |
+| **Storage (next)** | **One** Postgres+PostGIS for rows/geometry. **One** S3-compatible photo store (not MinIO and S3 together). |
 | **Output** | Dispatch list + why → outcomes → next season. |
 | **Side path** | Mumbai top-N vs BMC list → overlap %. |
 
@@ -30,7 +31,7 @@ Detail docs (not extra diagrams): `01` problem · `03` phases · `04` data · `0
 ```
 Citizen + Officer + Rain/Tide + Git seeds
   → web → api → Engine(1–4) ↔ Planner(Nugen | SopRules) → route (6)
-  → PostGIS + MinIO
+  → [MVP: memory + disk] → [Next: PostGIS + one object store]
   → Dispatch list → Outcome log
 ```
 
