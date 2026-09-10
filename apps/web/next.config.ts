@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/*": ["./../../data/**/*"],
   },
+  outputFileTracingExcludes: {
+    "/*": ["./../../data/validation/photo_train_set/images/**/*"],
+  },
 };
 
 export default nextConfig;

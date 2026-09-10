@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { credibility } from "./credibility";
+import { nextAtRisk } from "./next-at-risk";
 import { planWithSopRules } from "./planner";
 import { risk } from "./risk";
 import { severity } from "./severity";
@@ -106,4 +107,42 @@ test("sop planner returns actions from vocabulary", () => {
   assert.equal(plan.length, 1);
   assert.ok(["pump", "desilt", "barricade", "monitor"].includes(plan[0]!.action));
   assert.equal(plan[0]!.planner, "sop-rules");
+});
+
+test("next-at-risk flags a nearby dip even if the top spot is already the lowest", () => {
+  const base = {
+    isBlackspot: true,
+    blackspotSince: 2019,
+    rainNext3hMm: 40,
+    verifiedReportCount: 0,
+  };
+  const top = {
+    ...base,
+    id: "top",
+    name: "Underpass",
+    lat: 18.4805,
+    lon: 73.825,
+    lowPointScore: 0.92,
+  };
+  const neighbor = {
+    ...base,
+    id: "next",
+    name: "Confluence",
+    lat: 18.482,
+    lon: 73.83,
+    lowPointScore: 0.88,
+  };
+  const far = {
+    ...base,
+    id: "far",
+    name: "Far ward",
+    lat: 18.59,
+    lon: 73.76,
+    lowPointScore: 0.8,
+  };
+  assert.equal(nextAtRisk([top, neighbor, far], false).length, 0);
+  const flagged = nextAtRisk([top, neighbor, far], true);
+  assert.ok(flagged.some((r) => r.spotId === "next"));
+  assert.equal(flagged.find((r) => r.spotId === "next")?.name, "Confluence");
+  assert.ok(!flagged.some((r) => r.spotId === "top"));
 });

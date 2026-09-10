@@ -4,13 +4,15 @@
 
 | Step | Train a model? | What we actually do | How accuracy is judged |
 |---|---|---|---|
-| Credibility | Optional small **vision** model later for “water in photo” | Rules + vision flag + GPS + age + duplicate hash | Hold-out set: 20 flood / 20 dry / 5 dupes |
+| Credibility | **Yes — photo scene MLP** trained on ≥10k labelled images | Model class + water/pothole gates + GPS + age + duplicate hash. Dry roads are rejected. | Hold-out set + stored `photo_train_set` |
 | Severity | **No** | Rules from depth cues + report count + rain | Officer-readable labels; not a % claim |
 | Risk | **No** | Weighted formula: terrain + blackspot + rain + tide + verified reports | Mumbai top-N overlap vs BMC list |
 | Next-at-risk | **No** | Same catchment, lower elevation, rain continuing | Heuristic; never call it prediction |
 | Planning | **Nugen align** on SOP text (after invite) + SopRulePlanner now | Schema-validated actions | Valid plan rate; SOP vocabulary only |
 
-**Why we do not scrape the web to train a flood model:** there is no multi-year labelled “this lat/lon flooded at this hour” dataset for Indian ULBs. A scraped news model would be inaccurate, unexplainable, and easy to destroy in Q&A. Accuracy for FloodOps = **good curated ground truth + live signals + explainable weights**, validated against BMC’s published list.
+The photo-scene model is trained on **≥10,000 stored labelled images** (`data/validation/photo_train_set`) covering flood, pothole, dry road, indoor, clothing, nature, objects, and sky. It is a scene gate for credibility — not a claim that we can detect deepfakes.
+
+**Why we do not scrape the web to train a flood-at-this-hour model:** there is no multi-year labelled “this lat/lon flooded at this hour” dataset for Indian ULBs. A scraped news model would be inaccurate, unexplainable, and easy to destroy in Q&A. Accuracy for FloodOps = **good curated ground truth + live signals + explainable weights**, validated against BMC’s published list.
 
 ## Data we collect (this is the main accuracy work)
 

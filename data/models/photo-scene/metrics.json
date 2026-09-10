@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "nTotal": 10500,
+  "nTrain": 8400,
+  "nVal": 2100,
+  "trainAccuracy": 0.9996,
+  "valAccuracy": 0.999,
+  "valRecall": {
+    "flood": 1,
+    "pothole": 1,
+    "dry_road": 1,
+    "indoor": 1,
+    "clothing": 0.9911111111111112,
+    "nature": 1,
+    "object": 1,
+    "sky": 1
+  },
+  "valConfusion": {
+    "flood": {
+      "flood": 360,
+      "pothole": 0,
+      "dry_road": 0,
+      "indoor": 0,
+      "clothing": 0,
+      "nature": 0,
+      "object": 0,
+      "sky": 0
+    },
+    "pothole": {
+      "flood": 0,
+      "pothole": 317,
+      "dry_road": 0,
+      "indoor": 0,
+      "clothing": 0,
+      "nature": 0,
+      "object": 0,
+      "sky": 0
+    },
+    "dry_road": {
+      "flood": 0,
+      "pothole": 0,
+      "dry_road": 476,
+      "indoor": 0,
+      "clothing": 0,
+      "nature": 0,
+      "object": 0,
+      "sky": 0
+    },
+    "indoor": {
+      "flood": 0,
+      "pothole": 0,
+      "dry_road": 0,
+      "indoor": 224,
+      "clothing": 0,
+      "nature": 0,
+      "object": 0,
+      "sky": 0
+    },
+    "clothing": {
+      "flood": 0,
+      "pothole": 0,
+      "dry_road": 0,
+      "indoor": 0,
+      "clothing": 223,
+      "nature": 1,
+      "object": 1,
+      "sky": 0
+    },
+    "nature": {
+      "flood": 0,
+      "pothole": 0,
+      "dry_road": 0,
+      "indoor": 0,
+      "clothing": 0,
+      "nature": 194,
+      "object": 0,
+      "sky": 0
+    },
+    "object": {
+      "flood": 0,
+      "pothole": 0,
+      "dry_road": 0,
+      "indoor": 0,
+      "clothing": 0,
+      "nature": 0,
+      "object": 181,
+      "sky": 0
+    },
+    "sky": {
+      "flood": 0,
+      "pothole": 0,
+      "dry_road": 0,
+      "indoor": 0,
+      "clothing": 0,
+      "nature": 0,
+      "object": 0,
+      "sky": 123
+    }
+  },
+  "classes": [
+    "flood",
+    "pothole",
+    "dry_road",
+    "indoor",
+    "clothing",
+    "nature",
+    "object",
+    "sky"
+  ],
+  "counts": {
+    "flood": 1700,
+    "pothole": 1700,
+    "dry_road": 2300,
+    "indoor": 1150,
+    "clothing": 1150,
+    "nature": 950,
+    "object": 850,
+    "sky": 700
+  },
+  "notes": "Synthetic labelled scenes for photo credibility. Accept classes: flood, pothole. Dry roads must be rejected."
+}

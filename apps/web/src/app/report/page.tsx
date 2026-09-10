@@ -181,6 +181,8 @@ export default function ReportPage() {
           hasPhoto: boolean;
           waterDetected: boolean;
           waterScore: number;
+          photoClass?: string;
+          photoClassConfidence?: number;
           photoUrl: string | null;
           rankScore: number;
           createdAt: string;

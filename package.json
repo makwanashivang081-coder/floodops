@@ -8,7 +8,8 @@
     "typecheck": "pnpm -r typecheck",
     "test:data": "python scripts/test_data_phase.py all",
     "test:scoring": "pnpm --filter @floodops/scoring test",
-    "test:photos": "pnpm --filter @floodops/web test:photos"
+    "test:photos": "pnpm --filter @floodops/web test:photos",
+    "train:photos": "pnpm --filter @floodops/web train:photos"
   },
   "engines": {
     "node": ">=20"

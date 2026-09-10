@@ -34,3 +34,6 @@ Thumbs.db
 
 # logs
 *.log
+
+# full photo-scene training images (labels/features/samples/weights are kept)
+data/validation/photo_train_set/images/

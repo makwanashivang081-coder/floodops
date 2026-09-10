@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "status": "ready",
+  "nImages": 10500,
+  "imageSize": 96,
+  "seed": 42,
+  "classes": {
+    "flood": 1700,
+    "pothole": 1700,
+    "dry_road": 2300,
+    "indoor": 1150,
+    "clothing": 1150,
+    "nature": 950,
+    "object": 850,
+    "sky": 700
+  },
+  "acceptClasses": [
+    "flood",
+    "pothole"
+  ],
+  "rejectClasses": [
+    "dry_road",
+    "indoor",
+    "clothing",
+    "nature",
+    "object",
+    "sky"
+  ],
+  "paths": {
+    "images": "images/",
+    "samples": "samples/",
+    "labels": "labels.csv",
+    "features": "features.csv",
+    "weights": "data/models/photo-scene/weights.json"
+  }
+}

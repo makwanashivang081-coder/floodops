@@ -7,6 +7,7 @@ import {
   planWithSopRules,
   risk,
   severity,
+  RAIN_CONTINUING_MM_3H,
   type Action,
   type Asset,
   type DispatchItem,
@@ -57,6 +58,8 @@ export type StoredReport = {
   createdAt: string;
   waterDetected: boolean;
   waterScore: number;
+  photoClass?: string;
+  photoClassConfidence?: number;
   hasPhoto: boolean;
   rankScore: number;
 };
@@ -455,6 +458,9 @@ export async function submitReport(input: {
   cred.breakdown.damageLevel = damageLevel;
   cred.breakdown.waterReason = waterReason;
   cred.breakdown.sceneMatch = sceneMatch;
+  cred.breakdown.photoClass = detected.predictedClass;
+  cred.breakdown.photoClassConfidence = detected.classConfidence;
+  cred.breakdown.photoModelUsed = detected.modelUsed;
   cred.breakdown.nearestSpot = spot.name;
   cred.breakdown.rainMode = rain.mode;
   cred.breakdown.precipMm3h = rain.precipMm3h;
@@ -495,6 +501,8 @@ export async function submitReport(input: {
     createdAt: new Date().toISOString(),
     waterDetected,
     waterScore,
+    photoClass: detected.predictedClass,
+    photoClassConfidence: detected.classConfidence,
     hasPhoto,
     rankScore: rankReport(cred.value, sev.value, hasPhoto),
   };
@@ -539,7 +547,7 @@ export async function generateDispatch(
   rainMode: string;
   rainLabel: string;
   precipMm3h: number;
-  nextAtRisk: Array<{ spotId: string; reason: string }>;
+  nextAtRisk: Array<{ spotId: string; name: string; reason: string }>;
   items: DispatchItem[];
   planner: "sop-rules";
 }> {
@@ -550,7 +558,7 @@ export async function generateDispatch(
   const assets = await loadAssets(citySlug);
   const inputs = toSpotInputs(city, spots, rain.precipMm3h, reports);
   const items = planWithSopRules(inputs, assets);
-  const nar = nextAtRisk(inputs, rain.precipMm3h >= 8);
+  const nar = nextAtRisk(inputs, rain.precipMm3h >= RAIN_CONTINUING_MM_3H);
   store().lastPlan[citySlug] = items;
   return {
     city: citySlug,

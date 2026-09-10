@@ -9,6 +9,7 @@ import {
 } from "@/lib/labels";
 import { FALLBACK_CITIES, type CityOption } from "@/lib/cities";
 import { loadLocalReports, mergeReports } from "@/lib/local-reports";
+import { RAIN_CONTINUING_MM_3H } from "@floodops/scoring";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 type DispatchItem = {
@@ -34,6 +35,8 @@ type CitizenReport = {
   hasPhoto: boolean;
   waterDetected: boolean;
   waterScore: number;
+  photoClass?: string;
+  photoClassConfidence?: number;
   photoUrl: string | null;
   rankScore: number;
   createdAt: string;
@@ -47,7 +50,7 @@ type Dashboard = {
   spots: Array<{ id: string; name: string }>;
   plan: {
     planner: string;
-    nextAtRisk: Array<{ spotId: string; reason: string }>;
+    nextAtRisk: Array<{ spotId: string; name?: string; reason: string }>;
     items: DispatchItem[];
   };
 };
@@ -141,7 +144,7 @@ export default function AdminPage() {
     const spots = data?.spots ?? [];
     return (data?.plan.nextAtRisk ?? []).map((row) => ({
       ...row,
-      name: spots.find((s) => s.id === row.spotId)?.name ?? row.spotId,
+      name: row.name ?? spots.find((s) => s.id === row.spotId)?.name ?? row.spotId,
     }));
   }, [data]);
 
@@ -335,9 +338,15 @@ export default function AdminPage() {
             ) : null}
 
             <h3 className="pane-heading">May flood next</h3>
-            <p className="pane-sub">Nearby lower streets if the rain keeps falling.</p>
+            <p className="pane-sub">
+              Nearby low streets if this rain keeps falling — not a weather forecast.
+            </p>
             {!loading && data && nextAtRiskRows.length === 0 ? (
-              <p className="meta">None flagged for this rain intensity.</p>
+              <p className="meta">
+                {Number(data.rain.precipMm3h) < RAIN_CONTINUING_MM_3H
+                  ? `None flagged — rain is only ${Number(data.rain.precipMm3h).toFixed(1)} mm / 3h. Switch to Demo storm to see the next streets.`
+                  : "None flagged near the current top spots."}
+              </p>
             ) : null}
             <div className="dispatch-list">
               {nextAtRiskRows.map((row) => (
@@ -416,6 +425,16 @@ export default function AdminPage() {
                               {r.waterDetected
                                 ? `yes (${(r.waterScore * 100).toFixed(0)}%)`
                                 : "no"}
+                            </dd>
+                            <dt>photo scene</dt>
+                            <dd>
+                              {r.photoClass && r.photoClass !== "unknown"
+                                ? `${r.photoClass.replace(/_/g, " ")}${
+                                    r.photoClassConfidence
+                                      ? ` (${Math.round(r.photoClassConfidence * 100)}%)`
+                                      : ""
+                                  }`
+                                : "not classified"}
                             </dd>
                           </dl>
                         </div>
