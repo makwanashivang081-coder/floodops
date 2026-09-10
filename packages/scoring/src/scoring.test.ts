@@ -27,6 +27,29 @@ test("credibility rewards photo + water more than checkbox-only", () => {
   assert.ok(noPhoto.value < 0.6);
 });
 
+test("credibility does not reward a photo that is not a flood scene", () => {
+  const jeans = credibility({
+    hasPhoto: true,
+    waterDetected: false,
+    sceneMatch: false,
+    distanceMeters: 40,
+    ageMinutes: 10,
+    duplicateHit: false,
+    hasGps: true,
+  });
+  const floodPhoto = credibility({
+    hasPhoto: true,
+    waterDetected: true,
+    sceneMatch: true,
+    distanceMeters: 40,
+    ageMinutes: 10,
+    duplicateHit: false,
+    hasGps: true,
+  });
+  assert.ok(jeans.value < 0.45);
+  assert.ok(floodPhoto.value >= 0.85);
+});
+
 test("severity escalates with depth and rain", () => {
   assert.equal(
     severity({ depthCue: "vehicle", nearbyVerifiedReports: 0, rainIntensityMm1h: 1 }).value,

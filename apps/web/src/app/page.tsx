@@ -1,33 +1,24 @@
 import Link from "next/link";
+import { AppHeader } from "@/components/app-header";
 
 export default function HomePage() {
   return (
     <main className="shell">
-      <header className="topbar">
-        <div className="brand">
-          Flood<span>Ops</span>
-        </div>
-        <nav className="nav-links">
-          <Link href="/admin">Operations</Link>
-          <Link href="/report">Citizen report</Link>
-        </nav>
-      </header>
-
+      <AppHeader active="home" />
       <section className="home-hero">
-        <p className="section-label">Municipal flood operations</p>
         <h1>
           Flood<span style={{ color: "var(--rain)" }}>Ops</span>
         </h1>
         <p>
-          Turns live rainfall, terrain, historical blackspots, and photo-verified
-          citizen reports into an explainable dispatch plan for the city engineer.
+          When streets flood, this tells the city which spot to handle first,
+          what to send, and why.
         </p>
         <div className="home-actions">
           <Link className="btn primary" href="/admin">
-            Open operations console
+            Admin panel
           </Link>
           <Link className="btn" href="/report">
-            File a flood report
+            Report flood
           </Link>
         </div>
       </section>

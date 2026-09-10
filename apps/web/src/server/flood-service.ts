@@ -14,6 +14,7 @@ import {
   type SpotInput,
 } from "@floodops/scoring";
 import { dataDir, uploadsDir } from "./paths";
+import { ReportRejectedError } from "./report-errors";
 import { analyzePhotoCues } from "./water-detect";
 
 const DATA = dataDir();
@@ -62,6 +63,7 @@ export type StoredReport = {
 
 type RuntimeStore = {
   reports: StoredReport[];
+  reportsHydrated: boolean;
   assets: Record<string, Asset[]>;
   lastPlan: Record<string, DispatchItem[]>;
 };
@@ -72,9 +74,44 @@ declare global {
 
 function store(): RuntimeStore {
   if (!globalThis.__floodopsStore) {
-    globalThis.__floodopsStore = { reports: [], assets: {}, lastPlan: {} };
+    globalThis.__floodopsStore = {
+      reports: [],
+      reportsHydrated: false,
+      assets: {},
+      lastPlan: {},
+    };
   }
   return globalThis.__floodopsStore;
+}
+
+function reportsFile(): string {
+  return path.join(uploadsDir(), "reports.json");
+}
+
+async function hydrateReports(): Promise<void> {
+  const s = store();
+  if (s.reportsHydrated) return;
+  try {
+    const raw = await fs.readFile(reportsFile(), "utf8");
+    const parsed = JSON.parse(raw) as StoredReport[];
+    s.reports = Array.isArray(parsed) ? parsed : [];
+  } catch {
+    s.reports = s.reports ?? [];
+  }
+  s.reportsHydrated = true;
+}
+
+async function persistReports(): Promise<void> {
+  const s = store();
+  await fs.mkdir(uploadsDir(), { recursive: true });
+  await fs.writeFile(reportsFile(), JSON.stringify(s.reports.slice(0, 200)));
+}
+
+async function saveAcceptedReport(report: StoredReport): Promise<void> {
+  await hydrateReports();
+  const s = store();
+  s.reports = [report, ...s.reports.filter((r) => r.id !== report.id)];
+  await persistReports();
 }
 
 async function readText(rel: string): Promise<string> {
@@ -297,6 +334,7 @@ function nearestSpot(spots: SpotRecord[], lat: number, lon: number): SpotRecord 
 }
 
 export async function listReports(city: string): Promise<StoredReport[]> {
+  await hydrateReports();
   return store()
     .reports.filter((r) => r.city === city)
     .slice()
@@ -345,6 +383,7 @@ export async function submitReport(input: {
   const spot = nearestSpot(spots, input.lat, input.lon);
   const distance = haversineM(input.lat, input.lon, spot.lat, spot.lon);
 
+  await hydrateReports();
   const recent = store().reports.filter(
     (r) =>
       r.city === input.city &&
@@ -354,44 +393,58 @@ export async function submitReport(input: {
   const duplicateHit = recent.length > 0;
 
   const hasPhoto = Boolean(input.photoBase64 && input.photoBase64.length > 32);
+  if (!hasPhoto || !input.photoBase64) {
+    throw new ReportRejectedError(
+      "Add a photo of standing water or a broken road. Without it this is not sent to the city.",
+    );
+  }
+
   let waterDetected = false;
   let waterScore = 0;
   let damageScore = 0;
   let damageLevel: 1 | 2 | 3 | 4 | 5 = 1;
   let waterReason = "No photo attached";
   let photoName = "";
+  let sceneMatch = false;
   const id = randomUUID();
 
-  if (hasPhoto && input.photoBase64) {
-    await fs.mkdir(UPLOADS, { recursive: true });
-    const mimeMatch = /^data:(image\/[\w.+-]+);base64,/i.exec(input.photoBase64);
-    const mime = (mimeMatch?.[1] ?? "image/jpeg").toLowerCase();
-    const ext =
-      mime === "image/png"
-        ? "png"
-        : mime === "image/webp"
-          ? "webp"
-          : mime === "image/gif"
-            ? "gif"
-            : "jpg";
-    photoName = `${id}.${ext}`;
-    const buf = Buffer.from(
-      input.photoBase64.replace(/^data:image\/[\w.+-]+;base64,/i, ""),
-      "base64",
+  await fs.mkdir(UPLOADS, { recursive: true });
+  const mimeMatch = /^data:(image\/[\w.+-]+);base64,/i.exec(input.photoBase64);
+  const mime = (mimeMatch?.[1] ?? "image/jpeg").toLowerCase();
+  const ext =
+    mime === "image/png"
+      ? "png"
+      : mime === "image/webp"
+        ? "webp"
+        : mime === "image/gif"
+          ? "gif"
+          : "jpg";
+  const buf = Buffer.from(
+    input.photoBase64.replace(/^data:image\/[\w.+-]+;base64,/i, ""),
+    "base64",
+  );
+  const detected = await analyzePhotoCues(buf);
+  waterScore = detected.waterScore;
+  damageScore = detected.damageScore;
+  damageLevel = detected.damageLevel;
+  waterReason = detected.reason;
+  sceneMatch = detected.looksLikeFloodOrPothole;
+  waterDetected = detected.waterDetected;
+
+  if (!sceneMatch) {
+    throw new ReportRejectedError(
+      detected.sceneReason ||
+        "This photo does not look like flooding or road damage. It was not sent to the city.",
     );
-    await fs.writeFile(path.join(UPLOADS, photoName), buf);
-    const detected = await analyzePhotoCues(buf);
-    waterScore = detected.waterScore;
-    damageScore = detected.damageScore;
-    damageLevel = detected.damageLevel;
-    waterReason = detected.reason;
-    // Photo analysis is primary; checkbox can only boost when photo already looks wet.
-    waterDetected = detected.waterDetected || (input.waterDetected && detected.waterScore >= 0.12);
   }
 
+  photoName = `${id}.${ext}`;
+  await fs.writeFile(path.join(UPLOADS, photoName), buf);
+
   const cred = credibility({
-    hasPhoto,
+    hasPhoto: true,
     waterDetected,
+    sceneMatch: true,
     distanceMeters: distance,
     ageMinutes: 5,
     duplicateHit,
@@ -401,6 +454,7 @@ export async function submitReport(input: {
   cred.breakdown.damageScore = damageScore;
   cred.breakdown.damageLevel = damageLevel;
   cred.breakdown.waterReason = waterReason;
+  cred.breakdown.sceneMatch = sceneMatch;
   cred.breakdown.nearestSpot = spot.name;
   cred.breakdown.rainMode = rain.mode;
   cred.breakdown.precipMm3h = rain.precipMm3h;
@@ -444,7 +498,7 @@ export async function submitReport(input: {
     hasPhoto,
     rankScore: rankReport(cred.value, sev.value, hasPhoto),
   };
-  store().reports.unshift(report);
+  await saveAcceptedReport(report);
   await generateDispatch(input.city, rain.mode);
   return report;
 }

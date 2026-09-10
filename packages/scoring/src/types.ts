@@ -26,6 +26,8 @@ export type SpotInput = {
 export type ReportCredibilityInput = {
   hasPhoto: boolean;
   waterDetected: boolean;
+  /** False when the photo is not a flood / pothole scene. Defaults to true. */
+  sceneMatch?: boolean;
   distanceMeters: number;
   ageMinutes: number;
   duplicateHit: boolean;

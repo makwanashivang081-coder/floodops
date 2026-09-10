@@ -1,0 +1,16 @@
+name,lat,lon,since_year,ward_hint,source_url,notes
+Silk Board junction,12.9177,77.6238,2022,Bommanahalli,https://opencity.in/,ORR / Hosur Road choke; recurring BBMP flood-prone node
+KR Puram underpass,13.0072,77.6953,2022,Mahadevapura,https://opencity.in/,Old Madras Road dip; 2022 monsoon coverage
+Hebbal flyover base,13.0358,77.5970,2022,Hebbal,https://opencity.in/,Bellary Road low point
+Koramangala 80 ft drain,12.9352,77.6245,2022,Koramangala,https://opencity.in/,Storm-water drain overflow cluster
+Bellandur lake edge,12.9298,77.6784,2022,Bellandur,https://opencity.in/,Lake overflow / wetland edge
+Marathahalli ORR dip,12.9592,77.6974,2022,Marathahalli,https://opencity.in/,Outer Ring Road waterlogging
+Jayadeva junction,12.9166,77.5995,2022,BTM,https://opencity.in/,Bannerghatta / ORR node
+Richmond Circle,12.9668,77.5990,2018,Shantinagar,https://opencity.in/,Central low drain
+Mysore Road dip,12.9500,77.5300,2022,Vijayanagar,https://opencity.in/,West corridor
+Yeshwanthpur railway dip,13.0280,77.5400,2022,Yeshwanthpur,https://opencity.in/,Railway underpass
+Whitefield ITPL approach,12.9698,77.7499,2022,Whitefield,https://opencity.in/,IT corridor drainage stress
+Bannerghatta Road,12.8890,77.5970,2022,Arekere,https://opencity.in/,South radial
+Indiranagar 100 ft Road,12.9784,77.6408,2022,Indiranagar,https://opencity.in/,Inner east waterlogging
+Majestic bus stand,12.9767,77.5713,2018,Chickpet,https://opencity.in/,Central transit node
+Electronic City Phase 1,12.8458,77.6632,2022,Electronic City,https://opencity.in/,Hosur Road IT stretch

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ccu-pump-1",
+    "kind": "pump",
+    "name": "Pump unit 1 (Sealdah depot)",
+    "depot_lat": 22.5667,
+    "depot_lon": 88.371,
+    "available": true
+  },
+  {
+    "id": "ccu-pump-2",
+    "kind": "pump",
+    "name": "Pump unit 2 (Howrah depot)",
+    "depot_lat": 22.583,
+    "depot_lon": 88.3426,
+    "available": true
+  },
+  {
+    "id": "ccu-crew-1",
+    "kind": "crew",
+    "name": "Desilt crew A (Tollygunge)",
+    "depot_lat": 22.498,
+    "depot_lon": 88.345,
+    "available": true
+  },
+  {
+    "id": "ccu-crew-2",
+    "kind": "crew",
+    "name": "Barricade team B (Park Circus)",
+    "depot_lat": 22.543,
+    "depot_lon": 88.368,
+    "available": true
+  },
+  {
+    "id": "ccu-pump-3",
+    "kind": "pump",
+    "name": "Pump unit 3 (Salt Lake depot)",
+    "depot_lat": 22.576,
+    "depot_lon": 88.434,
+    "available": false
+  }
+]

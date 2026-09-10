@@ -91,7 +91,10 @@ Details: [`docs/04-data-sources.md`](docs/04-data-sources.md)
 | City | Role | Why |
 |---|---|---|
 | Mumbai | **Validation** | BMC publishes ~300–400 chronic flooding spots yearly → our top-N is scored against it. Tide adds a real second signal. |
+| Bengaluru | Open data | BBMP flood-prone lists + OpenCity wards after 2022. |
+| Chennai | Open data | GCC lists + 2015 flood record; coastal tide signal. |
 | Pune | **Demonstration** | No dispatch system exists. Same engine, thinner data, citizen reports fill the gap. |
+| Kolkata | Open data | KMC / news waterlogging nodes; coastal / Hooghly signal. |
 
 The engine is city-agnostic. Only the `data/cities/<city>/` folder changes.
 
@@ -108,7 +111,7 @@ pnpm dev
 Open:
 
 - Admin panel: http://localhost:3000/admin  
-- Citizen report: http://localhost:3000/report  
+- Report flood: http://localhost:3000/report  
 - Health: http://localhost:3000/api/health  
 
 Data lives in `data/cities/*`. Scoring + SopRulePlanner live in `packages/scoring`.

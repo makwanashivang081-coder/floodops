@@ -1,0 +1,42 @@
+[
+  {
+    "id": "blr-pump-1",
+    "kind": "pump",
+    "name": "Pump unit 1 (Koramangala depot)",
+    "depot_lat": 12.9352,
+    "depot_lon": 77.6245,
+    "available": true
+  },
+  {
+    "id": "blr-pump-2",
+    "kind": "pump",
+    "name": "Pump unit 2 (Hebbal depot)",
+    "depot_lat": 13.0358,
+    "depot_lon": 77.597,
+    "available": true
+  },
+  {
+    "id": "blr-crew-1",
+    "kind": "crew",
+    "name": "Desilt crew A (Silk Board)",
+    "depot_lat": 12.9177,
+    "depot_lon": 77.6238,
+    "available": true
+  },
+  {
+    "id": "blr-crew-2",
+    "kind": "crew",
+    "name": "Barricade team B (Majestic)",
+    "depot_lat": 12.9767,
+    "depot_lon": 77.5713,
+    "available": true
+  },
+  {
+    "id": "blr-pump-3",
+    "kind": "pump",
+    "name": "Pump unit 3 (Whitefield depot)",
+    "depot_lat": 12.9698,
+    "depot_lon": 77.7499,
+    "available": false
+  }
+]

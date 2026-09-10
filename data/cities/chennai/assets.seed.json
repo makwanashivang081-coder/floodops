@@ -1,0 +1,42 @@
+[
+  {
+    "id": "maa-pump-1",
+    "kind": "pump",
+    "name": "Pump unit 1 (T Nagar depot)",
+    "depot_lat": 13.0418,
+    "depot_lon": 80.2341,
+    "available": true
+  },
+  {
+    "id": "maa-pump-2",
+    "kind": "pump",
+    "name": "Pump unit 2 (Velachery depot)",
+    "depot_lat": 12.9816,
+    "depot_lon": 80.2209,
+    "available": true
+  },
+  {
+    "id": "maa-crew-1",
+    "kind": "crew",
+    "name": "Desilt crew A (Adyar)",
+    "depot_lat": 13.0067,
+    "depot_lon": 80.257,
+    "available": true
+  },
+  {
+    "id": "maa-crew-2",
+    "kind": "crew",
+    "name": "Barricade team B (Saidapet)",
+    "depot_lat": 13.0213,
+    "depot_lon": 80.2231,
+    "available": true
+  },
+  {
+    "id": "maa-pump-3",
+    "kind": "pump",
+    "name": "Pump unit 3 (Ambattur depot)",
+    "depot_lat": 13.1143,
+    "depot_lon": 80.1548,
+    "available": false
+  }
+]

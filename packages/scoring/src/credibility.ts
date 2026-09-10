@@ -13,15 +13,21 @@ export function credibility(input: ReportCredibilityInput): ScoredValue<number> 
     ageMinutes: input.ageMinutes,
   };
 
-  if (input.hasPhoto) {
+  const sceneOk = input.sceneMatch !== false;
+  breakdown.sceneMatch = sceneOk;
+
+  if (input.hasPhoto && sceneOk) {
     score += 0.3;
+  } else if (input.hasPhoto && !sceneOk) {
+    score -= 0.25;
+    breakdown.photoRejected = true;
   } else {
     score -= 0.15;
     breakdown.photoPenalty = true;
   }
 
-  // Water signal only counts when a photo exists (otherwise checkbox is unchecked noise).
-  if (input.hasPhoto && input.waterDetected) score += 0.25;
+  // Water signal only counts when a matching flood/pothole photo exists.
+  if (input.hasPhoto && sceneOk && input.waterDetected) score += 0.25;
   else if (!input.hasPhoto && input.waterDetected) {
     breakdown.waterIgnoredWithoutPhoto = true;
   }

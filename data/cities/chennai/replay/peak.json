@@ -1,0 +1,104 @@
+{
+  "mode": "replay",
+  "label": "peak",
+  "city_note": "Synthetic monsoon profile for demo/replay. Always show REPLAY banner.",
+  "hours": [
+    {
+      "hour": 0,
+      "precip_mm": 2.0
+    },
+    {
+      "hour": 1,
+      "precip_mm": 4.17
+    },
+    {
+      "hour": 2,
+      "precip_mm": 6.33
+    },
+    {
+      "hour": 3,
+      "precip_mm": 8.5
+    },
+    {
+      "hour": 4,
+      "precip_mm": 10.67
+    },
+    {
+      "hour": 5,
+      "precip_mm": 12.83
+    },
+    {
+      "hour": 6,
+      "precip_mm": 15.0
+    },
+    {
+      "hour": 7,
+      "precip_mm": 17.17
+    },
+    {
+      "hour": 8,
+      "precip_mm": 19.33
+    },
+    {
+      "hour": 9,
+      "precip_mm": 21.5
+    },
+    {
+      "hour": 10,
+      "precip_mm": 23.67
+    },
+    {
+      "hour": 11,
+      "precip_mm": 25.83
+    },
+    {
+      "hour": 12,
+      "precip_mm": 28.0
+    },
+    {
+      "hour": 13,
+      "precip_mm": 25.83
+    },
+    {
+      "hour": 14,
+      "precip_mm": 23.67
+    },
+    {
+      "hour": 15,
+      "precip_mm": 21.5
+    },
+    {
+      "hour": 16,
+      "precip_mm": 19.33
+    },
+    {
+      "hour": 17,
+      "precip_mm": 17.17
+    },
+    {
+      "hour": 18,
+      "precip_mm": 15.0
+    },
+    {
+      "hour": 19,
+      "precip_mm": 12.83
+    },
+    {
+      "hour": 20,
+      "precip_mm": 10.67
+    },
+    {
+      "hour": 21,
+      "precip_mm": 8.5
+    },
+    {
+      "hour": 22,
+      "precip_mm": 6.33
+    },
+    {
+      "hour": 23,
+      "precip_mm": 4.17
+    }
+  ],
+  "precip_mm_3h_peak": 79.66
+}

@@ -1,29 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { AppHeader } from "@/components/app-header";
+import { FALLBACK_CITIES, nearestCity, type CityOption } from "@/lib/cities";
+import { rememberLocalReport } from "@/lib/local-reports";
+import { useEffect, useState } from "react";
 
-type ReportResult = {
-  id: string;
-  spotId: string;
-  spotName: string;
-  credibility: number;
-  severity: string;
-  hasPhoto: boolean;
-  waterDetected: boolean;
-  waterScore: number;
-  photoUrl: string | null;
-  credibilityBreakdown: Record<string, number | string | boolean>;
-  severityBreakdown: Record<string, number | string | boolean>;
+type ReportDialog = {
+  kind: "ok" | "false";
+  title: string;
+  message: string;
 };
 
 export default function ReportPage() {
+  const [cities, setCities] = useState<CityOption[]>([]);
   const [city, setCity] = useState("pune");
   const [note, setNote] = useState("");
   const [depthCue, setDepthCue] = useState<"ankle" | "knee" | "vehicle" | "unknown">(
     "unknown",
   );
-  const [waterDetected, setWaterDetected] = useState(true);
   const [lat, setLat] = useState(18.4805);
   const [lon, setLon] = useState(73.825);
   const [locationReady, setLocationReady] = useState(false);
@@ -35,8 +30,19 @@ export default function ReportPage() {
   const [locationNote, setLocationNote] = useState<string | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<ReportResult | null>(null);
+  const [dialog, setDialog] = useState<ReportDialog | null>(null);
   const [showManualCoords, setShowManualCoords] = useState(false);
+
+  useEffect(() => {
+    void fetch("/api/cities")
+      .then((res) => res.json() as Promise<{ cities?: CityOption[] }>)
+      .then((json) => {
+        if (json.cities?.length) setCities(json.cities);
+      })
+      .catch(() => {
+        /* keep defaults */
+      });
+  }, []);
 
   function onFile(file: File | null) {
     setError(null);
@@ -102,15 +108,10 @@ export default function ReportPage() {
         setLat(nextLat);
         setLon(nextLon);
 
-        const dPune = Math.hypot(nextLat - 18.5204, nextLon - 73.8567);
-        const dMumbai = Math.hypot(nextLat - 19.076, nextLon - 72.8777);
-        const nextCity = dMumbai < dPune ? "mumbai" : "pune";
-        setCity(nextCity);
+        const matched = nearestCity(nextLat, nextLon, cities);
+        setCity(matched.slug);
         setLocationReady(true);
-
-        setLocationNote(
-          `Location received. Matched city: ${nextCity === "pune" ? "Pune" : "Mumbai"}.`,
-        );
+        setLocationNote(`Location received. Matched city: ${matched.name}.`);
         setLocationError(null);
         setLocating(false);
       },
@@ -142,9 +143,18 @@ export default function ReportPage() {
       setError("Still reading the photo — wait a moment, then submit.");
       return;
     }
+    if (!photoBase64) {
+      setDialog({
+        kind: "false",
+        title: "False report",
+        message:
+          "Add a photo of standing water or a broken road. Without it this is not sent to the city.",
+      });
+      return;
+    }
     setBusy(true);
     setError(null);
-    setResult(null);
+    setDialog(null);
     try {
       const res = await fetch(`/api/cities/${city}/reports`, {
         method: "POST",
@@ -153,14 +163,32 @@ export default function ReportPage() {
           lat,
           lon,
           note,
-          waterDetected,
           depthCue,
           photoBase64,
         }),
       });
-      let json: { report?: ReportResult; error?: string } = {};
+      let json: {
+        accepted?: boolean;
+        verdict?: string;
+        report?: {
+          id: string;
+          city?: string;
+          spotId: string;
+          spotName: string;
+          note: string;
+          credibility: number;
+          severity: string;
+          hasPhoto: boolean;
+          waterDetected: boolean;
+          waterScore: number;
+          photoUrl: string | null;
+          rankScore: number;
+          createdAt: string;
+        };
+        error?: string;
+      } = {};
       try {
-        json = (await res.json()) as { report?: ReportResult; error?: string };
+        json = (await res.json()) as typeof json;
       } catch {
         throw new Error(
           res.ok
@@ -168,9 +196,28 @@ export default function ReportPage() {
             : `Could not submit report (HTTP ${res.status}).`,
         );
       }
+      if (json.accepted === false || json.verdict === "false_report" || res.status === 422) {
+        setDialog({
+          kind: "false",
+          title: "False report",
+          message:
+            json.error ??
+            "This photo does not look like flooding or road damage. It was not sent to the city.",
+        });
+        return;
+      }
       if (!res.ok) throw new Error(json.error ?? "Could not submit report");
       if (!json.report) throw new Error("Server returned no report payload");
-      setResult(json.report);
+      rememberLocalReport({
+        ...json.report,
+        city,
+        photoUrl: photoBase64 ?? json.report.photoUrl,
+      });
+      setDialog({
+        kind: "ok",
+        title: "Report submitted",
+        message: `The city will see this near ${json.report.spotName}.`,
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not submit report");
     } finally {
@@ -178,39 +225,24 @@ export default function ReportPage() {
     }
   }
 
-  const cityLabel = city === "pune" ? "Pune" : "Mumbai";
+  const cityOptions = cities.length > 0 ? cities : FALLBACK_CITIES;
+  const cityLabel = cityOptions.find((c) => c.slug === city)?.name ?? city;
 
   return (
     <main className="shell">
-      <header className="topbar">
-        <div className="brand">
-          Flood<span>Ops</span>
-        </div>
-        <nav className="nav-links">
-          <Link href="/report" data-active="true">
-            Citizen report
-          </Link>
-          <Link href="/">Home</Link>
-        </nav>
-      </header>
+      <AppHeader active="report" />
 
       <div className="page-pad">
         <section className="pane" style={{ maxWidth: 640, margin: "0 auto" }}>
-          <p className="section-label">Public intake</p>
           <h2 className="pane-title">Report flooding</h2>
           <p className="pane-sub">
-            Share your location and a photo. The system matches the nearest flood blackspot and
-            scores the report for operations staff.
+            Send your location and a photo of the water. The city uses this to
+            decide who to send.
           </p>
 
           <form className="form-stack" onSubmit={(e) => void submit(e)}>
             <div className="step loc-card">
               <h3>1. Location</h3>
-              <p>
-                Share your current position so we can place this report on the correct street
-                segment. We do not track you afterward.
-              </p>
-
               <div className="loc-status">
                 <div className="loc-pin">GPS</div>
                 <div>
@@ -284,8 +316,11 @@ export default function ReportPage() {
                   <label style={{ marginTop: "0.65rem" }}>
                     City
                     <select value={city} onChange={(e) => setCity(e.target.value)}>
-                      <option value="pune">Pune</option>
-                      <option value="mumbai">Mumbai</option>
+                      {cityOptions.map((c) => (
+                        <option key={c.slug} value={c.slug}>
+                          {c.name}
+                        </option>
+                      ))}
                     </select>
                   </label>
                 </div>
@@ -293,8 +328,7 @@ export default function ReportPage() {
             </div>
 
             <div className="step">
-              <h3>2. Photo evidence</h3>
-              <p>A clear photo of standing water strengthens the report. Without it, credibility stays low.</p>
+              <h3>2. Photo</h3>
               <label>
                 Photo
                 <input
@@ -309,7 +343,7 @@ export default function ReportPage() {
                   ? "Reading photo…"
                   : photoBase64 && photoName
                     ? `Attached: ${photoName}`
-                    : "No photo attached"}
+                    : "Photo of standing water or a broken road. Clothes, selfies, and random objects are rejected."}
               </p>
               {photoBase64 ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -318,7 +352,7 @@ export default function ReportPage() {
             </div>
 
             <div className="step">
-              <h3>3. Conditions</h3>
+              <h3>3. Depth and note</h3>
               <label>
                 Observed depth
                 <select
@@ -333,16 +367,6 @@ export default function ReportPage() {
                   <option value="vehicle">Vehicle depth</option>
                 </select>
               </label>
-
-              <label className="check-row">
-                <input
-                  type="checkbox"
-                  checked={waterDetected}
-                  onChange={(e) => setWaterDetected(e.target.checked)}
-                />
-                Standing water is visible (counts only with a photo)
-              </label>
-
               <label>
                 Note
                 <textarea
@@ -359,27 +383,35 @@ export default function ReportPage() {
           </form>
 
           {error ? <p className="alert" style={{ marginTop: "1rem" }}>{error}</p> : null}
-
-          {result ? (
-            <div className="step" style={{ marginTop: "1.15rem" }}>
-              <h3>Report received · {result.spotName}</h3>
-              <p>
-                Credibility {result.credibility.toFixed(2)} · Severity {result.severity} · Photo{" "}
-                {result.hasPhoto ? "yes" : "no"} · Water{" "}
-                {result.waterDetected
-                  ? `detected (${(result.waterScore * 100).toFixed(0)}%)`
-                  : "not detected"}
-                {typeof result.credibilityBreakdown.damageLevel === "number"
-                  ? ` · Hazard level ${result.credibilityBreakdown.damageLevel}`
-                  : ""}
-              </p>
-              <p className="meta">
-                Operations staff will see this in the dispatch console. You can close this page.
-              </p>
-            </div>
-          ) : null}
         </section>
       </div>
+
+      {dialog ? (
+        <div
+          className="modal-backdrop"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="report-dialog-title"
+        >
+          <div className="modal" data-kind={dialog.kind}>
+            <h3 id="report-dialog-title">{dialog.title}</h3>
+            <p>{dialog.message}</p>
+            {dialog.kind === "ok" ? (
+              <Link
+                className="btn primary wide"
+                href={`/admin?city=${city}`}
+                onClick={() => setDialog(null)}
+              >
+                Open admin panel
+              </Link>
+            ) : (
+              <button className="btn primary wide" type="button" onClick={() => setDialog(null)}>
+                Try another photo
+              </button>
+            )}
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { ReportRejectedError } from "@/server/report-errors";
 import { submitReport } from "@/server/flood-service";
 
 type Ctx = { params: Promise<{ city: string }> };
@@ -22,12 +23,18 @@ export async function POST(req: Request, ctx: Ctx) {
       lat: body.lat,
       lon: body.lon,
       note: body.note ?? "",
-      waterDetected: body.waterDetected ?? true,
-      depthCue: body.depthCue ?? "knee",
+      waterDetected: body.waterDetected ?? false,
+      depthCue: body.depthCue ?? "unknown",
       photoBase64: body.photoBase64,
     });
-    return NextResponse.json({ report }, { status: 201 });
+    return NextResponse.json({ accepted: true, report }, { status: 201 });
   } catch (e) {
+    if (e instanceof ReportRejectedError) {
+      return NextResponse.json(
+        { accepted: false, verdict: "false_report", error: e.message },
+        { status: 422 },
+      );
+    }
     return NextResponse.json(
       { error: e instanceof Error ? e.message : "Failed" },
       { status: 500 },
