@@ -7,5 +7,6 @@ node_modules
 **/dist
 uploads
 data/raw
+data/validation/photo_train_set/images
 *.tif
 *.hgt
