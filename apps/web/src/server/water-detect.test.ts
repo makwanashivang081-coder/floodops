@@ -133,6 +133,34 @@ test("standing-water flood photo is accepted", async () => {
   assert.equal(cues.waterDetected, true);
 });
 
+test("murky brown flood water is accepted", async () => {
+  const { data } = await sharp({
+    create: { width: 96, height: 96, channels: 3, background: { r: 92, g: 90, b: 84 } },
+  })
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  for (let y = 42; y < 96; y++) {
+    for (let x = 0; x < 96; x++) {
+      const i = (y * 96 + x) * 3;
+      data[i] = 72;
+      data[i + 1] = 66;
+      data[i + 2] = 48;
+    }
+  }
+  const buf = await sharp(data, { raw: { width: 96, height: 96, channels: 3 } })
+    .jpeg()
+    .toBuffer();
+  const cues = await analyzePhotoCues(buf);
+  assert.equal(cues.looksLikeFloodOrPothole, true, cues.sceneReason);
+  assert.ok(cues.sceneScore >= 0.38, `sceneScore ${cues.sceneScore}`);
+});
+
+test("reject-class confidence alone does not invent a flood scene", async () => {
+  const cues = await analyzePhotoCues(await dryRoad());
+  assert.equal(cues.looksLikeFloodOrPothole, false);
+  assert.ok(cues.sceneScore < 0.38);
+});
+
 test("generated flood scenes are accepted", async () => {
   const rng = mulberry32(11);
   let accepted = 0;

@@ -24,6 +24,13 @@ export type PhotoSceneClass = (typeof PHOTO_SCENE_CLASSES)[number];
 
 export const PHOTO_ACCEPT_CLASSES: ReadonlySet<PhotoSceneClass> = new Set(["flood", "pothole"]);
 
+/** Minimum combined flood+pothole probability to trust the model accept path. */
+export const ACCEPT_MASS_MIN = 0.42;
+/** Reject when the top class is non-incident and confidence is at least this. */
+export const REJECT_CONFIDENCE_MIN = 0.4;
+/** Heuristic-only accept needs this water/pothole corroboration when the model is weak. */
+export const HEURISTIC_ACCEPT_MASS_MIN = 0.28;
+
 export type PhotoSceneWeights = {
   version: number;
   featureNames: string[];
@@ -133,13 +140,37 @@ export function predictPhotoScene(
   };
 }
 
+function acceptMass(prediction: PhotoScenePrediction): number {
+  return (prediction.probs.flood ?? 0) + (prediction.probs.pothole ?? 0);
+}
+
+function rejectLabelReason(label: PhotoSceneClass): string {
+  if (label === "dry_road") {
+    return "This looks like a normal dry road — no standing water or pothole. It was not sent to the city.";
+  }
+  if (label === "clothing") {
+    return "Photo looks like clothing or fabric, not a flooded street or pothole.";
+  }
+  if (label === "indoor") {
+    return "Photo looks indoor, not a flooded street or pothole.";
+  }
+  if (label === "nature") {
+    return "Photo looks like greenery or open nature, not a flooded street or pothole.";
+  }
+  if (label === "sky") {
+    return "Photo looks like sky, not a flooded street or pothole.";
+  }
+  return "Photo does not look like standing water or road damage. It was not sent to the city.";
+}
+
 export function decideIncidentScene(
   features: PhotoFeatures,
   prediction: PhotoScenePrediction,
-): { looksLikeFloodOrPothole: boolean; sceneReason: string } {
+): { looksLikeFloodOrPothole: boolean; sceneReason: string; sceneConfidence: number } {
   if (looksLikeClothingOrPerson(features)) {
     return {
       looksLikeFloodOrPothole: false,
+      sceneConfidence: 0,
       sceneReason:
         features.skinRatio >= 0.24
           ? "Photo looks like a person, not a flooded street or pothole."
@@ -149,41 +180,140 @@ export function decideIncidentScene(
 
   const water = hasStandingWater(features);
   const pothole = hasPotholeCue(features);
+  const mass = acceptMass(prediction);
+  const sceneConfidence = Number(
+    Math.max(
+      0,
+      Math.min(
+        1,
+        prediction.modelUsed
+          ? mass * 0.75 + (water || pothole ? 0.25 : 0)
+          : water || pothole
+            ? 0.55
+            : 0,
+      ),
+    ).toFixed(3),
+  );
 
+  if (prediction.modelUsed) {
+    const topIsReject = !PHOTO_ACCEPT_CLASSES.has(prediction.label);
+    const strongReject =
+      topIsReject && prediction.confidence >= REJECT_CONFIDENCE_MIN && mass < ACCEPT_MASS_MIN;
+
+    // Strong geometric water / pothole evidence can override a synthetic-model miss
+    // (real murky floods often look unlike the cool-blue training scenes).
+    const strongHeuristic =
+      (water && features.waterScore >= 0.28 && features.skinRatio < 0.2) ||
+      (water && features.murkyRatio >= 0.16 && features.lowerCoolRatio >= 0.1 && features.skinRatio < 0.18) ||
+      (pothole && features.holePeak >= 0.32 && features.asphaltRatio >= 0.12);
+
+    if (strongHeuristic) {
+      return {
+        looksLikeFloodOrPothole: true,
+        sceneConfidence: Number(
+          Math.max(
+            sceneConfidence,
+            Math.min(0.82, features.waterScore * 0.7 + (pothole ? 0.35 : 0.2)),
+          ).toFixed(3),
+        ),
+        sceneReason: water
+          ? `Looks like standing water on a street (water ${(features.waterScore * 100).toFixed(0)}%).`
+          : `Looks like a broken-road / pothole photo (road ${(features.asphaltRatio * 100).toFixed(0)}%, hole ${(features.holePeak * 100).toFixed(0)}%).`,
+      };
+    }
+
+    if (strongReject) {
+      return {
+        looksLikeFloodOrPothole: false,
+        sceneConfidence,
+        sceneReason: rejectLabelReason(prediction.label),
+      };
+    }
+
+    if (PHOTO_ACCEPT_CLASSES.has(prediction.label) && prediction.confidence >= 0.38) {
+      if (water || pothole || mass >= ACCEPT_MASS_MIN) {
+        return {
+          looksLikeFloodOrPothole: true,
+          sceneConfidence: Math.max(sceneConfidence, prediction.confidence),
+          sceneReason:
+            prediction.label === "flood"
+              ? `Looks like standing water on a street (model ${(prediction.confidence * 100).toFixed(0)}%).`
+              : `Looks like a broken-road / pothole photo (model ${(prediction.confidence * 100).toFixed(0)}%).`,
+        };
+      }
+    }
+
+    if (mass >= ACCEPT_MASS_MIN && (water || pothole)) {
+      return {
+        looksLikeFloodOrPothole: true,
+        sceneConfidence,
+        sceneReason: water
+          ? `Looks like standing water on a street (water ${(features.waterScore * 100).toFixed(0)}%).`
+          : `Looks like a broken-road / pothole photo (road ${(features.asphaltRatio * 100).toFixed(0)}%, hole ${(features.holePeak * 100).toFixed(0)}%).`,
+      };
+    }
+
+    // Heuristics alone are not enough when the model is loaded — stops dry roads / junk reaching admin.
+    if (!water && !pothole) {
+      if (features.asphaltRatio >= 0.14) {
+        return {
+          looksLikeFloodOrPothole: false,
+          sceneConfidence,
+          sceneReason:
+            "This looks like a normal road — no standing water or pothole. It was not sent to the city.",
+        };
+      }
+      return {
+        looksLikeFloodOrPothole: false,
+        sceneConfidence,
+        sceneReason: "Photo does not look like standing water or road damage.",
+      };
+    }
+
+    if (mass < HEURISTIC_ACCEPT_MASS_MIN) {
+      return {
+        looksLikeFloodOrPothole: false,
+        sceneConfidence,
+        sceneReason: rejectLabelReason(topIsReject ? prediction.label : "object"),
+      };
+    }
+
+    return {
+      looksLikeFloodOrPothole: true,
+      sceneConfidence,
+      sceneReason: water
+        ? `Looks like standing water on a street (water ${(features.waterScore * 100).toFixed(0)}%).`
+        : `Looks like a broken-road / pothole photo (road ${(features.asphaltRatio * 100).toFixed(0)}%, hole ${(features.holePeak * 100).toFixed(0)}%).`,
+    };
+  }
+
+  // No trained weights — heuristic fallback only.
   if (!water && !pothole) {
     if (features.asphaltRatio >= 0.14) {
       return {
         looksLikeFloodOrPothole: false,
+        sceneConfidence: 0,
         sceneReason:
           "This looks like a normal road — no standing water or pothole. It was not sent to the city.",
       };
     }
     return {
       looksLikeFloodOrPothole: false,
+      sceneConfidence: 0,
       sceneReason: "Photo does not look like standing water or road damage.",
-    };
-  }
-
-  if (
-    prediction.modelUsed &&
-    !water &&
-    (prediction.label === "indoor" || prediction.label === "clothing") &&
-    prediction.confidence >= 0.55
-  ) {
-    return {
-      looksLikeFloodOrPothole: false,
-      sceneReason: `Photo looks like ${prediction.label.replace("_", " ")}, not a flooded street or pothole.`,
     };
   }
 
   if (water) {
     return {
       looksLikeFloodOrPothole: true,
+      sceneConfidence: 0.55,
       sceneReason: `Looks like standing water on a street (water ${(features.waterScore * 100).toFixed(0)}%).`,
     };
   }
   return {
     looksLikeFloodOrPothole: true,
+    sceneConfidence: 0.55,
     sceneReason: `Looks like a broken-road / pothole photo (road ${(features.asphaltRatio * 100).toFixed(0)}%, hole ${(features.holePeak * 100).toFixed(0)}%).`,
   };
 }

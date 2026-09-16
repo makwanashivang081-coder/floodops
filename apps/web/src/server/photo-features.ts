@@ -79,6 +79,7 @@ export function extractPhotoFeatures(
   let cool = 0;
   let wetGray = 0;
   let murky = 0;
+  let muddy = 0;
   let darkCrater = 0;
   let midBreak = 0;
   let asphalt = 0;
@@ -168,9 +169,22 @@ export function extractPhotoFeatures(
       if (coolWater) cool += 1;
       if (max < 100 && sat < 0.22 && channelSpread < 16 && b > r + 6 && !nearGray) wetGray += 1;
       if (sat < 0.24 && lum >= 28 && lum <= 120 && b > r + 6 && !nearGray) murky += 1;
+      // Brown / olive standing water (typical city flood runoff) — must be browner than asphalt.
+      const muddyWater =
+        sat >= 0.05 &&
+        sat <= 0.4 &&
+        lum >= 30 &&
+        lum <= 110 &&
+        Math.abs(r - g) <= 16 &&
+        r > b + 8 &&
+        r - b <= 48 &&
+        g <= r + 8 &&
+        channelSpread < 36 &&
+        !isSkinTone(r, g, b, sat, lum);
+      if (muddyWater) muddy += 1;
       if (lum < 45 && sat < 0.25) darkCrater += 1;
       else if (lum < 85 && sat < 0.2) midBreak += 1;
-      if (sat > 0.32 && lum > 35 && lum < 200) fabric += 1;
+      if (sat > 0.32 && lum > 35 && lum < 200 && !muddyWater && !coolWater) fabric += 1;
       if (isSkinTone(r, g, b, sat, lum)) skin += 1;
       if (r > g + 8 && r > b + 8 && sat > 0.18) warm += 1;
       if (g > r + 8 && g > b && sat > 0.18 && lum > 40) greenish += 1;
@@ -180,6 +194,7 @@ export function extractPhotoFeatures(
       if (y >= lowerRow) {
         lower += 1;
         if (coolWater) lowerCool += 1;
+        else if (muddyWater) lowerCool += 0.7;
         if (lum < 45) lowerDark += 1;
         if (isAsphalt) lowerAsphalt += 1;
       }
@@ -201,7 +216,7 @@ export function extractPhotoFeatures(
 
   const coolRatio = ground ? cool / ground : 0;
   const wetRatio = ground ? wetGray / ground : 0;
-  const murkyRatio = ground ? murky / ground : 0;
+  const murkyRatio = ground ? (murky + muddy * 0.85) / ground : 0;
   const darkRatio = ground ? darkCrater / ground : 0;
   const breakRatio = ground ? midBreak / ground : 0;
   const asphaltRatio = ground ? asphalt / ground : 0;
@@ -258,9 +273,12 @@ export function extractPhotoFeatures(
 
   const waterScore = Number(
     clip01(
-      lowerCoolRatio * 1.35 +
-        specularRatio * 0.7 +
-        (lowerCoolRatio >= 0.12 ? 0.08 : 0),
+      lowerCoolRatio * 1.15 +
+        murkyRatio * 0.65 +
+        wetRatio * 0.4 +
+        specularRatio * 0.55 +
+        (lowerCoolRatio >= 0.12 ? 0.08 : 0) +
+        (murkyRatio >= 0.12 && lowerDarkRatio >= 0.1 ? 0.14 : 0),
     ).toFixed(4),
   );
   const waterForDamage = coolRatio > 0.03 ? waterScore * 0.2 : 0;
@@ -305,7 +323,27 @@ export function extractPhotoFeatures(
 }
 
 export function hasStandingWater(features: PhotoFeatures): boolean {
-  return features.lowerCoolRatio >= 0.1 || (features.waterScore >= 0.22 && features.lowerCoolRatio >= 0.06);
+  if (features.lowerCoolRatio >= 0.1) return true;
+  if (features.waterScore >= 0.22 && features.lowerCoolRatio >= 0.06) return true;
+
+  // Murky / brown standing water — common in city floods, often missed by cool-blue cues.
+  const murkyFlood =
+    features.murkyRatio >= 0.16 &&
+    features.lowerCoolRatio >= 0.1 &&
+    features.fabricRatio < 0.3 &&
+    features.skinRatio < 0.18 &&
+    features.satHighRatio < 0.35 &&
+    features.asphaltRatio < 0.6;
+  if (murkyFlood) return true;
+
+  const wetPavement =
+    features.wetRatio >= 0.14 &&
+    features.lowerDarkRatio >= 0.14 &&
+    features.asphaltRatio >= 0.1 &&
+    features.fabricRatio < 0.25 &&
+    features.skinRatio < 0.18 &&
+    features.uniformity < 0.78;
+  return wetPavement;
 }
 
 export function hasPotholeCue(features: PhotoFeatures): boolean {
@@ -320,6 +358,10 @@ export function hasPotholeCue(features: PhotoFeatures): boolean {
 }
 
 export function looksLikeClothingOrPerson(features: PhotoFeatures): boolean {
+  // Never treat clear water / road-damage cues as clothing.
+  if (hasStandingWater(features) || hasPotholeCue(features)) return false;
+  if (features.waterScore >= 0.28 || features.murkyRatio >= 0.16) return false;
+
   return (
     (features.fabricRatio >= 0.22 || features.skinRatio >= 0.24) &&
     features.asphaltRatio < 0.22 &&

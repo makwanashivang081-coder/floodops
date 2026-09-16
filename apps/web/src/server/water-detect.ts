@@ -61,16 +61,24 @@ export function cuesFromFeatures(features: PhotoFeatures): PhotoCueResult {
   const decision = decideIncidentScene(features, prediction);
   const waterDetected = decision.looksLikeFloodOrPothole && features.waterScore >= 0.28;
   const damageLevel = levelFromDamage(features.damageScore, features.waterScore);
-  const sceneScore = Number(
+  const acceptMass = (prediction.probs.flood ?? 0) + (prediction.probs.pothole ?? 0);
+  let sceneScore = Number(
     Math.max(
       0,
       Math.min(
         1,
-        (prediction.probs.flood + prediction.probs.pothole) * 0.7 +
-          (decision.looksLikeFloodOrPothole ? 0.3 : 0),
+        prediction.modelUsed
+          ? acceptMass * 0.55 + decision.sceneConfidence * 0.45
+          : decision.looksLikeFloodOrPothole
+            ? Math.max(0.5, decision.sceneConfidence)
+            : 0,
       ),
     ).toFixed(3),
   );
+  // Accepted scenes always clear the admin intake floor when heuristics/model agree.
+  if (decision.looksLikeFloodOrPothole) {
+    sceneScore = Math.max(sceneScore, Math.min(0.92, Math.max(0.42, decision.sceneConfidence)));
+  }
   const reason = [
     waterDetected
       ? `wet/cool cue ${(features.waterScore * 100).toFixed(0)}%`

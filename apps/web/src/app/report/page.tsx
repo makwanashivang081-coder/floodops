@@ -7,7 +7,7 @@ import { rememberLocalReport } from "@/lib/local-reports";
 import { useEffect, useState } from "react";
 
 type ReportDialog = {
-  kind: "ok" | "false";
+  kind: "ok" | "reject";
   title: string;
   message: string;
 };
@@ -145,10 +145,10 @@ export default function ReportPage() {
     }
     if (!photoBase64) {
       setDialog({
-        kind: "false",
-        title: "False report",
+        kind: "reject",
+        title: "Photo needed",
         message:
-          "Add a photo of standing water or a broken road. Without it this is not sent to the city.",
+          "Add a clear photo of standing water or a broken road. Without it this is not sent to the city.",
       });
       return;
     }
@@ -200,8 +200,8 @@ export default function ReportPage() {
       }
       if (json.accepted === false || json.verdict === "false_report" || res.status === 422) {
         setDialog({
-          kind: "false",
-          title: "False report",
+          kind: "reject",
+          title: "Photo not accepted",
           message:
             json.error ??
             "This photo does not look like flooding or road damage. It was not sent to the city.",
@@ -215,10 +215,13 @@ export default function ReportPage() {
         city,
         photoUrl: photoBase64 ?? json.report.photoUrl,
       });
+      const trust = json.report.credibility;
+      const trustLabel =
+        trust >= 0.75 ? "strong" : trust >= 0.55 ? "good" : "usable";
       setDialog({
         kind: "ok",
         title: "Report submitted",
-        message: `The city will see this near ${json.report.spotName}.`,
+        message: `Photo looks ${trustLabel} (trust ${trust.toFixed(2)}). The city will see this near ${json.report.spotName}.`,
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not submit report");

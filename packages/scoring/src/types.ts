@@ -28,6 +28,11 @@ export type ReportCredibilityInput = {
   waterDetected: boolean;
   /** False when the photo is not a flood / pothole scene. Defaults to true. */
   sceneMatch?: boolean;
+  /**
+   * 0–1 how strongly the photo looks like flood / pothole.
+   * When omitted, accepted scenes default to a mid-high prior.
+   */
+  sceneConfidence?: number;
   distanceMeters: number;
   ageMinutes: number;
   duplicateHit: boolean;

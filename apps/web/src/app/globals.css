@@ -673,6 +673,7 @@ textarea {
   color: var(--ok);
 }
 
+.modal[data-kind="reject"] h3,
 .modal[data-kind="false"] h3 {
   color: var(--danger);
 }

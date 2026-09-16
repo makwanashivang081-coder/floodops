@@ -434,7 +434,8 @@ export async function submitReport(input: {
   sceneMatch = detected.looksLikeFloodOrPothole;
   waterDetected = detected.waterDetected;
 
-  if (!sceneMatch) {
+  // Weak / conflicting scenes never enter the admin queue — even if a cue flickers.
+  if (!sceneMatch || detected.sceneScore < 0.38) {
     throw new ReportRejectedError(
       detected.sceneReason ||
         "This photo does not look like flooding or road damage. It was not sent to the city.",
@@ -444,10 +445,13 @@ export async function submitReport(input: {
   photoName = `${id}.${ext}`;
   await fs.writeFile(path.join(UPLOADS, photoName), buf);
 
+  // Trust only the flood/pothole scene score — never a reject-class confidence like 0.8 dry_road.
+  const sceneConfidence = detected.sceneScore;
   const cred = credibility({
     hasPhoto: true,
     waterDetected,
     sceneMatch: true,
+    sceneConfidence,
     distanceMeters: distance,
     ageMinutes: 5,
     duplicateHit,
@@ -458,12 +462,20 @@ export async function submitReport(input: {
   cred.breakdown.damageLevel = damageLevel;
   cred.breakdown.waterReason = waterReason;
   cred.breakdown.sceneMatch = sceneMatch;
+  cred.breakdown.sceneScore = detected.sceneScore;
   cred.breakdown.photoClass = detected.predictedClass;
   cred.breakdown.photoClassConfidence = detected.classConfidence;
   cred.breakdown.photoModelUsed = detected.modelUsed;
   cred.breakdown.nearestSpot = spot.name;
   cred.breakdown.rainMode = rain.mode;
   cred.breakdown.precipMm3h = rain.precipMm3h;
+
+  // Do not park low-trust junk in admin: require a usable credibility floor.
+  if (cred.value < 0.45) {
+    throw new ReportRejectedError(
+      "Photo evidence was too weak to send to the city. Try a clearer shot of the water or road damage.",
+    );
+  }
 
   // Without a photo, do not trust a harsh depth claim alone.
   // With a photo, unknown depth falls back to image damage level.
@@ -484,6 +496,18 @@ export async function submitReport(input: {
   sev.breakdown.damageLevel = damageLevel;
   sev.breakdown.photoDepthCue = depthCue;
 
+  // Store the incident label admins expect — never a reject class on an accepted report.
+  const acceptClass =
+    detected.predictedClass === "flood" || detected.predictedClass === "pothole"
+      ? detected.predictedClass
+      : waterDetected
+        ? "flood"
+        : "pothole";
+  const acceptConfidence =
+    detected.predictedClass === acceptClass
+      ? detected.classConfidence
+      : detected.sceneScore;
+
   const report: StoredReport = {
     id,
     city: input.city,
@@ -501,8 +525,8 @@ export async function submitReport(input: {
     createdAt: new Date().toISOString(),
     waterDetected,
     waterScore,
-    photoClass: detected.predictedClass,
-    photoClassConfidence: detected.classConfidence,
+    photoClass: acceptClass,
+    photoClassConfidence: acceptConfidence,
     hasPhoto,
     rankScore: rankReport(cred.value, sev.value, hasPhoto),
   };

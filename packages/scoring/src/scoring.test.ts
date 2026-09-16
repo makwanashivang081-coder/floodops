@@ -18,13 +18,15 @@ test("credibility rewards photo + water more than checkbox-only", () => {
   const withPhoto = credibility({
     hasPhoto: true,
     waterDetected: true,
+    sceneMatch: true,
+    sceneConfidence: 0.85,
     distanceMeters: 40,
     ageMinutes: 10,
     duplicateHit: false,
     hasGps: true,
   });
   assert.ok(withPhoto.value > noPhoto.value);
-  assert.ok(withPhoto.value >= 0.85);
+  assert.ok(withPhoto.value >= 0.75);
   assert.ok(noPhoto.value < 0.6);
 });
 
@@ -33,6 +35,7 @@ test("credibility does not reward a photo that is not a flood scene", () => {
     hasPhoto: true,
     waterDetected: false,
     sceneMatch: false,
+    sceneConfidence: 0.1,
     distanceMeters: 40,
     ageMinutes: 10,
     duplicateHit: false,
@@ -42,13 +45,29 @@ test("credibility does not reward a photo that is not a flood scene", () => {
     hasPhoto: true,
     waterDetected: true,
     sceneMatch: true,
+    sceneConfidence: 0.85,
     distanceMeters: 40,
     ageMinutes: 10,
     duplicateHit: false,
     hasGps: true,
   });
   assert.ok(jeans.value < 0.45);
-  assert.ok(floodPhoto.value >= 0.85);
+  assert.ok(floodPhoto.value >= 0.75);
+});
+
+test("weak scene confidence cannot reach high trust from GPS alone", () => {
+  const weak = credibility({
+    hasPhoto: true,
+    waterDetected: false,
+    sceneMatch: true,
+    sceneConfidence: 0.35,
+    distanceMeters: 40,
+    ageMinutes: 10,
+    duplicateHit: false,
+    hasGps: true,
+  });
+  assert.ok(weak.value <= 0.62);
+  assert.ok(weak.breakdown.weakSceneCap === true);
 });
 
 test("severity escalates with depth and rain", () => {

@@ -6,6 +6,7 @@ import {
   plannerLabel,
   rainBadgeLabel,
   severityLabel,
+  trustLabel,
 } from "@/lib/labels";
 import { FALLBACK_CITIES, type CityOption } from "@/lib/cities";
 import { loadLocalReports, mergeReports } from "@/lib/local-reports";
@@ -363,7 +364,9 @@ export default function AdminPage() {
 
           <section className="pane">
             <h2 className="pane-title">Citizen reports</h2>
-            <p className="pane-sub">Every accepted report stays here. A rejected photo never appears.</p>
+            <p className="pane-sub">
+              Only photos that clear the scene check appear here. Rejected uploads never enter this list.
+            </p>
             {!loading && rankedReports.length === 0 ? (
               <p className="meta">None yet. Anyone can send one from Report flood.</p>
             ) : (
@@ -390,8 +393,8 @@ export default function AdminPage() {
                         <div>
                           <div className="spot-name">{r.spotName}</div>
                           <div className="meta">
-                            trust {r.credibility.toFixed(2)} ·{" "}
-                            {r.hasPhoto ? "has photo" : "no photo"}
+                            trust {r.credibility.toFixed(2)} · {trustLabel(r.credibility)}
+                            {r.hasPhoto ? "" : " · no photo"}
                           </div>
                         </div>
                         <span className={`sev ${r.severity}`}>{severityLabel(r.severity)}</span>
@@ -419,7 +422,9 @@ export default function AdminPage() {
                           )}
                           <dl>
                             <dt>trust score</dt>
-                            <dd>{r.credibility.toFixed(2)}</dd>
+                            <dd>
+                              {r.credibility.toFixed(2)} · {trustLabel(r.credibility)}
+                            </dd>
                             <dt>water in photo</dt>
                             <dd>
                               {r.waterDetected
